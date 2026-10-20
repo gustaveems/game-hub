@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Hub Options</title>
+  <style>
+    :root {
+      --bg: #1a1a2e;
+      --bg-card: #16213e;
+      --text: #e0e0e0;
+      --text-muted: #8892a4;
+      --text-heading: #ffffff;
+      --accent: #4fc3f7;
+      --accent-hover: #81d4fa;
+      --danger: #ef5350;
+      --danger-hover: #e57373;
+      --border: #2a3a5c;
+      --bg-input: #0f1729;
+      --success: #66bb6a;
+      --font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f5f5f5;
+        --bg-card: #ffffff;
+        --text: #333333;
+        --text-muted: #777777;
+        --text-heading: #111111;
+        --accent: #1976d2;
+        --accent-hover: #1565c0;
+        --danger: #d32f2f;
+        --danger-hover: #c62828;
+        --border: #dde0e4;
+        --bg-input: #f0f0f0;
+        --success: #388e3c;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 32px 24px;
+    }
+    h1 { color: var(--text-heading); font-size: 1.5rem; margin-bottom: 24px; }
+    .section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    .section h2 { font-size: 1rem; color: var(--text-heading); margin-bottom: 12px; }
+    .section p { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px; }
+    .btn {
+      padding: 8px 16px; border: none; border-radius: 6px;
+      font-size: 0.85rem; cursor: pointer; font-family: var(--font);
+    }
+    .btn-primary { background: var(--accent); color: #111; font-weight: 600; }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-danger { background: var(--danger); color: white; }
+    .btn-danger:hover { background: var(--danger-hover); }
+    .btn-ghost { background: transparent; color: var(--text-muted); border: 1px solid var(--border); }
+    .btn-ghost:hover { background: var(--bg-card); color: var(--text); }
+    .btn-row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .msg { font-size: 0.85rem; margin-top: 10px; }
+    .msg.ok { color: var(--success); }
+    .msg.err { color: var(--danger); }
+    .usage { font-size: 0.9rem; color: var(--text); }
+    input[type="file"] { display: none; }
+  </style>
+</head>
+<body>
+  <h1>🎮 Game Hub Options</h1>
+
+  <div class="section">
+    <h2>Storage Usage</h2>
+    <p class="usage" id="usage">Calculating…</p>
+  </div>
+
+  <div class="section">
+    <h2>Export Library</h2>
+    <p>Download your game library as a JSON file.</p>
+    <button class="btn btn-primary" id="btn-export">Export JSON</button>
+  </div>
+
+  <div class="section">
+    <h2>Import Library</h2>
+    <p>Import a previously exported JSON file. This <strong>replaces</strong> your current library. Invalid entries will be skipped.</p>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="btn-import">Choose File</button>
+      <input type="file" id="file-import" accept=".json,application/json">
+    </div>
+    <div class="msg" id="import-msg"></div>
+  </div>
+
+  <div class="section">
+    <h2>Reset to Starter List</h2>
+    <p>Replaces your library with the built-in starter games. This cannot be undone.</p>
+    <button class="btn btn-danger" id="btn-reset">Reset</button>
+    <div class="msg" id="reset-msg"></div>
+  </div>
+
+  <script type="module" src="options.js"></script>
+</body>
+</html>

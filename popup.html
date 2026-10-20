@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    :root {
+      --bg: #1a1a2e;
+      --text: #e0e0e0;
+      --text-muted: #8892a4;
+      --accent: #4fc3f7;
+      --accent-hover: #81d4fa;
+      --border: #2a3a5c;
+      --bg-input: #0f1729;
+      --success: #66bb6a;
+      --danger: #ef5350;
+      --font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #ffffff;
+        --text: #333333;
+        --text-muted: #777777;
+        --accent: #1976d2;
+        --accent-hover: #1565c0;
+        --border: #dde0e4;
+        --bg-input: #f0f0f0;
+        --success: #388e3c;
+        --danger: #d32f2f;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 320px;
+      padding: 16px;
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+    }
+    h2 { font-size: 1rem; margin-bottom: 12px; }
+    .field { margin-bottom: 10px; }
+    .field label { display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 3px; }
+    .field input {
+      width: 100%; padding: 6px 10px; border: 1px solid var(--border);
+      border-radius: 6px; background: var(--bg-input); color: var(--text);
+      font-size: 0.85rem; font-family: var(--font);
+    }
+    .btn {
+      width: 100%; padding: 8px; border: none; border-radius: 6px;
+      font-size: 0.85rem; cursor: pointer; font-family: var(--font);
+      background: var(--accent); color: #111; font-weight: 600;
+    }
+    .btn:hover { background: var(--accent-hover); }
+    .msg { font-size: 0.8rem; margin-top: 8px; text-align: center; }
+    .msg.ok { color: var(--success); }
+    .msg.err { color: var(--danger); }
+    .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.6s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <h2>🎮 Add Current Tab</h2>
+  <div class="field">
+    <label>URL</label>
+    <input type="text" id="p-url" readonly>
+  </div>
+  <div class="field">
+    <label>Title</label>
+    <input type="text" id="p-title">
+  </div>
+  <button class="btn" id="p-add">Add to Game Hub</button>
+  <div class="msg" id="p-msg"></div>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Hub</title>
+  <link rel="stylesheet" href="newtab.css">
+</head>
+<body>
+  <div class="header">
+    <h1>🎮 Game Hub</h1>
+    <div class="search-box">
+      <input type="text" id="search" placeholder='Search games… (press "/" to focus)' autocomplete="off">
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-primary" id="btn-add">+ Add Game</button>
+    </div>
+  </div>
+
+  <div class="filter-bar" id="filter-bar">
+    <select class="sort-select" id="sort-select">
+      <option value="title">Sort: Title</option>
+      <option value="added">Sort: Recently Added</option>
+      <option value="played">Sort: Most Played</option>
+    </select>
+  </div>
+
+  <div class="game-grid" id="game-grid"></div>
+  <div class="empty-state hidden" id="empty-state">
+    <h2>No games yet</h2>
+    <p>Add your first game to get started.</p>
+    <button class="btn btn-primary" id="btn-add-empty">+ Add Game</button>
+    <br>
+    <button class="restore-link" id="btn-restore-empty">Restore starter games</button>
+  </div>
+
+  <!-- Add/Edit modal -->
+  <div class="modal-overlay hidden" id="modal-add">
+    <div class="modal-content">
+      <h2 id="modal-add-title">Add Game</h2>
+      <div class="form-group">
+        <label for="field-url">URL</label>
+        <input type="url" id="field-url" placeholder="https://example.com/game">
+        <div class="form-error hidden" id="url-error"></div>
+        <div class="form-warning hidden" id="url-warning"></div>
+      </div>
+      <div class="form-group">
+        <label for="field-title">Title</label>
+        <input type="text" id="field-title" placeholder="Game title">
+      </div>
+      <div class="form-group">
+        <label for="field-desc">Description</label>
+        <textarea id="field-desc" placeholder="Short description"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="field-thumb">Thumbnail URL</label>
+        <input type="url" id="field-thumb" placeholder="https://… (optional)">
+      </div>
+      <div class="form-group">
+        <label for="field-tags">Tags (comma-separated)</label>
+        <input type="text" id="field-tags" placeholder="puzzle, arcade, multiplayer">
+      </div>
+      <div class="form-group">
+        <label for="field-launch">Launch mode</label>
+        <select id="field-launch">
+          <option value="tab">Open in new tab</option>
+          <option value="embed">Embed in overlay</option>
+        </select>
+      </div>
+      <div id="fetch-status" class="hidden"><span class="spinner"></span> Fetching metadata…</div>
+      <div class="form-actions">
+        <button class="btn btn-ghost" id="btn-cancel-add">Cancel</button>
+        <button class="btn btn-primary" id="btn-save-add">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Embed overlay -->
+  <div class="embed-overlay hidden" id="embed-overlay">
+    <div class="embed-toolbar">
+      <span class="embed-title" id="embed-title"></span>
+      <button class="btn btn-small btn-ghost" id="embed-open-tab">Open in tab</button>
+      <button class="btn btn-small btn-ghost" id="embed-close">✕ Close (Esc)</button>
+    </div>
+    <iframe class="embed-frame hidden" id="embed-frame" sandbox="allow-scripts allow-same-origin allow-popups allow-forms"></iframe>
+    <div class="embed-fallback hidden" id="embed-fallback">
+      <p>This site blocks embedding in iframes.</p>
+      <button class="btn btn-primary" id="embed-fallback-open">Open in a new tab instead</button>
+    </div>
+  </div>
+
+  <script type="module" src="newtab.js"></script>
+</body>
+</html>

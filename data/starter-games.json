@@ -1,0 +1,109 @@
+[
+  {
+    "title": "2048",
+    "url": "https://play2048.co/",
+    "description": "Slide numbered tiles on a grid to combine them and reach 2048.",
+    "thumbnail": null,
+    "tags": ["puzzle", "classic"],
+    "launchMode": "embed"
+  },
+  {
+    "title": "Wordle",
+    "url": "https://www.nytimes.com/games/wordle/index.html",
+    "description": "Guess the five-letter word in six tries with color-coded clues.",
+    "thumbnail": null,
+    "tags": ["word", "daily"],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Tetris",
+    "url": "https://tetris.com/play-tetris",
+    "description": "The classic falling-blocks puzzle game.",
+    "thumbnail": null,
+    "tags": ["puzzle", "classic", "arcade"],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Slither.io",
+    "url": "https://slither.io/",
+    "description": "Grow your snake by eating glowing orbs in a multiplayer arena.",
+    "thumbnail": null,
+    "tags": ["multiplayer", "arcade"],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Chess.com",
+    "url": "https://www.chess.com/play/online",
+    "description": "Play chess online against players worldwide or the computer.",
+    "thumbnail": null,
+    "tags": ["strategy", "multiplayer", "classic"],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Agar.io",
+    "url": "https://agar.io/",
+    "description": "Eat smaller cells and avoid bigger ones in this multiplayer game.",
+    "thumbnail": null,
+    "tags": ["multiplayer", "arcade"],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Cookie Clicker",
+    "url": "https://orteil.dashnet.org/cookieclicker/",
+    "description": "Click the cookie to earn more cookies, then automate the baking empire.",
+    "thumbnail": null,
+    "tags": ["idle", "clicker"],
+    "launchMode": "embed"
+  },
+  {
+    "title": "Krunker.io",
+    "url": "https://krunker.io/",
+    "description": "Fast-paced multiplayer first-person shooter in the browser.",
+    "thumbnail": null,
+    "tags": ["shooter", "multiplayer"],
+    "launchMode": "tab"
+  },
+  {
+    "title": "GeoGuessr",
+    "url": "https://www.geoguessr.com/",
+    "description": "Guess locations around the world from Google Street View.",
+    "thumbnail": null,
+    "tags": ["trivia", "geography"],
+    "launchMode": "tab",
+    "verify": true
+  },
+  {
+    "title": "Hole.io",
+    "url": "https://hole-io.com/",
+    "description": "Control a black hole swallowing everything in a city.",
+    "thumbnail": null,
+    "tags": ["arcade", "casual"],
+    "launchMode": "tab",
+    "verify": true
+  },
+  {
+    "title": "Little Alchemy 2",
+    "url": "https://littlealchemy2.com/",
+    "description": "Combine elements to discover new items — 700+ to find.",
+    "thumbnail": null,
+    "tags": ["puzzle", "casual"],
+    "launchMode": "embed"
+  },
+  {
+    "title": "Hacker Typer",
+    "url": "https://hackertyper.net/",
+    "description": "Mash the keyboard and look like a movie hacker.",
+    "thumbnail": null,
+    "tags": ["joke", "casual"],
+    "launchMode": "embed"
+  },
+  {
+    "title": "Powerline.io",
+    "url": "https://powerline.io/",
+    "description": "Multiplayer snake game with neon visuals on a dark grid.",
+    "thumbnail": null,
+    "tags": ["multiplayer", "arcade"],
+    "launchMode": "tab",
+    "verify": true
+  }
+]
