@@ -17,8 +17,8 @@
   "options_page": "options.html",
   "permissions": [
     "storage",
-    "tabs",
-    "declarativeNetRequest"
+    "unlimitedStorage",
+    "tabs"
   ],
   "host_permissions": [
     "<all_urls>"

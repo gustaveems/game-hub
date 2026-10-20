@@ -1,76 +1,101 @@
 # Game Hub
 
-A Chrome extension that replaces your new-tab page with a personal library of browser games.
+A Chrome extension that turns your new-tab page into a personal library of browser games, with a quick-launch popup for your favorites. Comes with ~30 curated games (trivia/daily-puzzle heavy) and lets you add your own by URL or by uploading an HTML file.
 
 ## Loading the Extension
 
 1. Open Chrome and go to `chrome://extensions`
-2. Enable **Developer mode** (toggle in the top-right corner)
+2. Enable **Developer mode** (top-right toggle)
 3. Click **Load unpacked** and select this folder
-4. Open a new tab — you should see the Game Hub library
+4. Open a new tab — the Game Hub library appears
 
-## Adding a Game
+## The Popup (toolbar icon)
 
-**From the new-tab page:**
-1. Click **+ Add Game**
-2. Paste a URL — metadata (title, description, thumbnail) will be fetched automatically
-3. Edit any fields, add tags, choose a launch mode, and click **Save**
+Click the Game Hub icon in the toolbar to get a compact panel with:
 
-**From any tab (popup):**
-1. Click the Game Hub extension icon in the toolbar
-2. The current tab's URL and title are pre-filled
-3. Click **Add to Game Hub**
+- **Favorites** — up to 5 tiles with each game's logo. Clicking one launches it (URL games open in a tab; embedded/uploaded games open in the full library overlay). The list is filled by: starred favorites first, then most-played, then most-recently-added.
+- **Quick add** — paste a URL and hit **Add**, grab the **Current tab**, or **Upload** a local `.html` game.
+- **Open Full Library →** — opens the new-tab page with the whole collection.
+
+## The Full Library (new-tab page)
+
+- **Grid of game cards** — each shows the site's favicon as a logo on a branded-color tile (or an `og:image` thumbnail if one was fetched/set), with title, tags, and a favorite star.
+- **Search** — filters by title and tag as you type.
+- **Filter chips** — All, Favorites, Recently Played, and one per tag.
+- **Sort** — Title, Recently Added, Most Played.
+- **Card menu (⋮)** — Edit, Delete, Toggle favorite, Switch launch mode.
+- **+ Add Game** — opens a modal with URL metadata auto-fetch, duplicate warnings, tag input, launch-mode toggle, and an **Upload .html** option.
+
+## Logos
+
+Game logos come from the site's favicon via Google's favicon image service (an image URL, not a script — no remote code runs). If a game has an explicit `og:image` thumbnail it's used instead. If both fail, a colored tile with the title's initials is shown.
 
 ## Launch Modes
 
-- **Tab**: Opens the game in a new browser tab (default).
-- **Embed**: Opens the game in a full-screen overlay iframe within the new-tab page. If the site blocks embedding (via X-Frame-Options or CSP), a fallback message appears with an option to open in a new tab instead.
+- **Tab** — opens the game in a new browser tab (default; best for sites that block framing like NYT, GeoGuessr, sports-reference).
+- **Embed** — opens the game in a full-screen overlay iframe. If the site blocks embedding (X-Frame-Options / CSP `frame-ancestors`), a fallback message offers to open it in a new tab.
+- **Uploaded games** always use embed mode — the stored HTML plays from a blob URL in the overlay.
 
-## Keyboard Shortcuts
+## Keyboard Shortcuts (library)
 
 | Key | Action |
 |-----|--------|
-| `/` | Focus the search box |
-| `n` | Open the Add Game modal |
-| `Esc` | Close modals or the embed overlay |
+| `/` | Focus search |
+| `n` | Open Add Game |
+| `Esc` | Close modal or embed overlay |
 
 ## Options Page
 
-Right-click the extension icon → **Options**, or go to `chrome://extensions` → Game Hub → **Details** → **Extension options**.
+`chrome://extensions` → Game Hub → **Details** → **Extension options**.
 
-- **Export**: Download your library as JSON
-- **Import**: Replace your library from a JSON file (invalid entries are skipped with a report)
-- **Reset**: Restore the built-in starter games
-- **Storage usage**: See how much space your library uses
+- **Export** library as JSON
+- **Import** from JSON (replaces the library; invalid entries are skipped with a report)
+- **Reset** to the starter list
+- **Storage usage** readout
 
 ## Known Limitations
 
-- **Embed detection is best-effort.** The extension checks `X-Frame-Options` and CSP `frame-ancestors` headers via a `fetch()` from the extension context. Some servers send different headers to browsers vs. fetch requests, or set frame-busting via JavaScript. The iframe fallback message handles these cases.
-- **Metadata fetch** depends on the target site allowing cross-origin requests from the extension. Some sites may return incomplete or no metadata.
-- **Thumbnails** are hotlinked from the original site's `og:image`. If the site goes down or changes URLs, thumbnails may break. A colored placeholder with initials is shown as a fallback.
-- **Storage** uses `chrome.storage.local`, which has a ~10 MB limit. This is more than enough for a game library (thousands of entries) but not for storing images locally.
+- **Embed detection is best-effort.** The check reads `X-Frame-Options`/CSP via a `fetch()` from the extension; some servers send different headers to real navigations, or frame-bust via JavaScript. The iframe fallback message exists precisely because this can't be fully reliable from an extension.
+- **Favicon logos** are fetched from Google's favicon service and depend on it being reachable; the initials tile is the fallback.
+- **Thumbnails** (when set) are hotlinked from the source site and can break if that site changes.
+- **Uploaded games** are stored in `chrome.storage.local` (the `unlimitedStorage` permission is declared). Only self-contained HTML files work well; games that load external assets by relative path may not.
+- **`og:image`/metadata fetching** needs the target site to allow a cross-origin request from the extension; some sites return nothing.
 
-## Test Checklist
+## Data Model
 
-Run through these in about 10 minutes after loading the extension:
+```
+{
+  id, title, url, description, thumbnail,
+  tags: string[],
+  launchMode: "tab" | "embed",
+  source: "url" | "local",
+  favorite: boolean,
+  addedAt, lastPlayedAt, playCount
+}
+```
+Stored under key `games` with `schemaVersion: 2`. Uploaded game bodies are stored separately under `local:<id>`. A migration hook upgrades v1 data (adds `source: "url"`).
 
-1. Load the extension at `chrome://extensions` — no errors or warnings in the panel
-2. Open a new tab — the starter games grid appears with thumbnails or colored placeholders
-3. Click a game card — it opens in a new tab; check that play count increments on return
-4. Use the search box — type part of a game title; the grid filters in real time
-5. Click a tag chip (e.g., "puzzle") — only matching games appear; click "All" to reset
-6. Change the sort dropdown to "Most Played" — the game you just played should rank higher
-7. Click the star on a card's three-dot menu → "Favorite" — the star icon appears; click "Favorites" chip to filter
-8. Click three-dot menu → "Switch to embed" on a game, then click its card — the embed overlay appears; press Esc to close
-9. Click **+ Add Game**, paste a URL (e.g., `https://www.nytimes.com`), wait for metadata fetch — title and description should auto-fill
-10. Try adding a duplicate URL — a warning should appear
-11. Try adding a URL without `http(s)` — an error should appear
-12. Edit a game via three-dot menu → "Edit" — change the title, save, verify it persists after closing and reopening the tab
-13. Delete a game via three-dot menu → "Delete" — confirm the dialog; verify it's gone
-14. Delete all games, verify the empty state shows up with "Add Game" and "Restore starter games"
-15. Click "Restore starter games" — the starter list returns
-16. Open the extension popup on any page — verify URL and title are pre-filled; add it
-17. Go to the Options page: export JSON, reset to starter list, then import the exported JSON — library should match the export
-18. Press `/` to focus search, `n` to open Add Game modal, `Esc` to close — all work
-19. Resize the window narrow (< 400px) — cards should reflow to a single column
-20. Toggle your OS between light and dark mode — the UI theme should follow
+## Test Checklist (~10 minutes)
+
+1. Load at `chrome://extensions` — no errors or warnings
+2. Open a new tab — ~30 starter games appear, each with a favicon logo tile
+3. Click the toolbar icon — the popup shows favorites (initially most-recent), quick-add, and "Open Full Library"
+4. In the popup, click a favorite tile — the game launches and the popup closes
+5. In the popup, paste a URL (e.g. `https://sudoku.com`) and click Add — it appears; the count increments
+6. In the popup, click **+ Current tab** on any page — it's added
+7. In the popup, click **Open Full Library →** — the library tab opens
+8. In the library, search "trivia" — only trivia-tagged games show
+9. Click a tag chip (e.g. "geography") — the grid filters; click "All" to reset
+10. Star a game via ⋮ → Favorite — reopen the popup; it should now appear in Favorites
+11. Sort by "Most Played" after launching a couple of games — they rank higher
+12. ⋮ → Switch to embed on an embeddable game (e.g. 2048), click it — the overlay plays it; press Esc to close
+13. Click an embed game that blocks framing — the fallback "Open in a new tab" message appears
+14. **+ Add Game**, paste a URL, wait — title/description/thumbnail auto-fill; edit and save
+15. Try a duplicate URL — a warning shows; try a non-http URL — an error shows
+16. **+ Add Game → Upload .html**, pick a self-contained HTML game — it's added as a "local" card; click it to play in the overlay
+17. Edit a game (⋮ → Edit), change the title, save — reload the tab; the change persists
+18. Delete a game (⋮ → Delete, confirm) — it's gone after reload
+19. Delete all games — the empty state with "Restore starter games" appears; click it
+20. Options page: Export, Reset, then Import the exported file — library round-trips
+21. Resize the window below 400px — cards reflow to fewer columns
+22. Toggle OS light/dark mode — the theme follows

@@ -235,15 +235,42 @@ body {
   object-fit: cover;
 }
 
-.card-thumb-placeholder {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.2rem;
+/* Logo tile: branded color background with the site's favicon centered */
+.logo-tile {
+  background: var(--tile, #333);
+  position: relative;
+}
+
+.logo-tile::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(0,0,0,0.18));
+  pointer-events: none;
+}
+
+.logo-img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.logo-initials {
+  font-size: 2rem;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.92);
+  letter-spacing: 1px;
+}
+
+.no-match {
+  color: var(--text-muted);
+  padding: 24px;
+  grid-column: 1 / -1;
+  text-align: center;
 }
 
 .card-body {
@@ -263,6 +290,13 @@ body {
 .card-title .fav-star {
   color: var(--star);
   font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.card-title-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .card-tags {
@@ -411,6 +445,29 @@ body {
   color: var(--star);
   font-size: 0.8rem;
   margin-top: 4px;
+}
+
+/* Upload row in add modal */
+.upload-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 12px 0 4px;
+  border-top: 1px solid var(--border);
+  margin-top: 6px;
+}
+
+.upload-label {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.upload-status {
+  font-size: 0.78rem;
+  color: var(--accent);
+  margin-top: 4px;
+  min-height: 1em;
 }
 
 /* Embed overlay */

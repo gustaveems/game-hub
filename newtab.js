@@ -1,9 +1,10 @@
 import {
   getGames, addGame, updateGame, deleteGame, recordPlay,
-  resetToStarter, normalizeUrl
+  resetToStarter, normalizeUrl, saveLocalGameBody, getLocalGameBody
 } from './lib/storage.js';
 import { fetchMetadata } from './lib/metadata.js';
 import { checkEmbeddable } from './lib/embed.js';
+import { faviconUrl, hashColor, initials } from './lib/logo.js';
 
 let games = [];
 let activeFilter = 'all';
@@ -11,23 +12,10 @@ let activeSort = 'title';
 let searchQuery = '';
 let editingId = null;
 let openMenuId = null;
+let pendingUpload = null; // { html, name } for an in-progress game upload
 
 const $ = (sel) => document.querySelector(sel);
-const $$ = (sel) => document.querySelectorAll(sel);
 
-// --- Placeholder color from string ---
-function hashColor(str) {
-  let h = 0;
-  for (const c of str) h = ((h << 5) - h + c.charCodeAt(0)) | 0;
-  const hue = Math.abs(h) % 360;
-  return `hsl(${hue}, 55%, 40%)`;
-}
-
-function initials(title) {
-  return title.split(/\s+/).slice(0, 2).map(w => w[0]?.toUpperCase() || '').join('');
-}
-
-// --- Render ---
 async function loadAndRender() {
   games = await getGames();
   render();
@@ -47,21 +35,18 @@ function getFilteredGames() {
   if (activeFilter === 'favorites') {
     list = list.filter(g => g.favorite);
   } else if (activeFilter === 'recent') {
-    list = list.filter(g => g.lastPlayedAt).sort((a, b) =>
-      new Date(b.lastPlayedAt) - new Date(a.lastPlayedAt)
-    ).slice(0, 10);
+    list = list
+      .filter(g => g.lastPlayedAt)
+      .sort((a, b) => new Date(b.lastPlayedAt) - new Date(a.lastPlayedAt))
+      .slice(0, 10);
   } else if (activeFilter !== 'all') {
     list = list.filter(g => g.tags.includes(activeFilter));
   }
 
   if (activeFilter !== 'recent') {
-    if (activeSort === 'title') {
-      list.sort((a, b) => a.title.localeCompare(b.title));
-    } else if (activeSort === 'added') {
-      list.sort((a, b) => new Date(b.addedAt) - new Date(a.addedAt));
-    } else if (activeSort === 'played') {
-      list.sort((a, b) => b.playCount - a.playCount);
-    }
+    if (activeSort === 'title') list.sort((a, b) => a.title.localeCompare(b.title));
+    else if (activeSort === 'added') list.sort((a, b) => new Date(b.addedAt) - new Date(a.addedAt));
+    else if (activeSort === 'played') list.sort((a, b) => b.playCount - a.playCount);
   }
 
   return list;
@@ -89,11 +74,11 @@ function render() {
   grid.classList.remove('hidden');
 
   if (filtered.length === 0) {
-    grid.innerHTML = '<p style="color:var(--text-muted);padding:24px;grid-column:1/-1;text-align:center;">No games match your search or filter.</p>';
+    grid.innerHTML = '<p class="no-match">No games match your search or filter.</p>';
     return;
   }
 
-  grid.innerHTML = filtered.map(g => cardHTML(g)).join('');
+  grid.innerHTML = filtered.map(cardHTML).join('');
 
   grid.querySelectorAll('.game-card').forEach(card => {
     const id = card.dataset.id;
@@ -111,33 +96,49 @@ function render() {
   });
 }
 
+function logoTileHTML(g) {
+  // Branded-color tile with the site's favicon logo, used when there is no
+  // explicit thumbnail. Falls back to the title's initials if the logo 404s.
+  const color = hashColor(g.title);
+  const fav = g.source === 'local' ? null : faviconUrl(g.url, 128);
+  const initialsHtml = `<span class="logo-initials">${escHtml(initials(g.title))}</span>`;
+  const logoImg = fav
+    ? `<img class="logo-img" src="${escHtml(fav)}" alt="" loading="lazy" onerror="this.classList.add('hidden');this.nextElementSibling.classList.remove('hidden')"><span class="logo-initials hidden">${escHtml(initials(g.title))}</span>`
+    : initialsHtml;
+  return `<div class="card-thumb logo-tile" style="--tile:${color}">${logoImg}</div>`;
+}
+
 function cardHTML(g) {
-  const thumbHtml = g.thumbnail
-    ? `<img src="${escHtml(g.thumbnail)}" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'card-thumb-placeholder\\' style=\\'background:${hashColor(g.title)}\\'>${escHtml(initials(g.title))}</div>'">`
-    : `<div class="card-thumb-placeholder" style="background:${hashColor(g.title)}">${escHtml(initials(g.title))}</div>`;
+  const thumb = g.thumbnail
+    ? `<div class="card-thumb"><img src="${escHtml(g.thumbnail)}" alt="" loading="lazy"></div>`
+    : logoTileHTML(g);
 
   const favStar = g.favorite ? '<span class="fav-star">★</span>' : '';
   const tagsHtml = g.tags.map(t => `<span class="card-tag">${escHtml(t)}</span>`).join('');
+  const badge = g.source === 'local' ? 'local' : g.launchMode;
   const menuOpen = openMenuId === g.id;
 
   return `
     <div class="game-card" data-id="${g.id}">
-      <div class="card-thumb">${thumbHtml}</div>
+      ${thumb}
       <div class="card-body">
-        <div class="card-title">${favStar}${escHtml(g.title)}<span class="launch-badge">${g.launchMode}</span></div>
+        <div class="card-title">${favStar}<span class="card-title-text">${escHtml(g.title)}</span><span class="launch-badge">${badge}</span></div>
         <div class="card-tags">${tagsHtml}</div>
       </div>
-      <button class="card-menu-btn" data-id="${g.id}" title="Menu">⋮</button>
+      <button class="card-menu-btn" data-id="${g.id}" title="Menu" aria-label="Game menu">⋮</button>
       ${menuOpen ? dropdownHTML(g) : ''}
     </div>`;
 }
 
 function dropdownHTML(g) {
+  const modeBtn = g.source === 'local'
+    ? ''
+    : `<button data-action="mode" data-id="${g.id}">Switch to ${g.launchMode === 'tab' ? 'embed' : 'tab'}</button>`;
   return `
     <div class="card-dropdown">
       <button data-action="edit" data-id="${g.id}">Edit</button>
       <button data-action="fav" data-id="${g.id}">${g.favorite ? 'Unfavorite' : 'Favorite'}</button>
-      <button data-action="mode" data-id="${g.id}">Switch to ${g.launchMode === 'tab' ? 'embed' : 'tab'}</button>
+      ${modeBtn}
       <button data-action="delete" data-id="${g.id}" class="danger">Delete</button>
     </div>`;
 }
@@ -145,28 +146,22 @@ function dropdownHTML(g) {
 function renderFilterBar() {
   const bar = $('#filter-bar');
   const tags = getAllTags();
-
-  const existingSort = bar.querySelector('.sort-select');
-  const chips = bar.querySelectorAll('.chip');
-  chips.forEach(c => c.remove());
+  const sortSelect = bar.querySelector('.sort-select');
+  bar.querySelectorAll('.chip').forEach(c => c.remove());
 
   const builtIn = [
     { key: 'all', label: 'All' },
-    { key: 'favorites', label: 'Favorites' },
+    { key: 'favorites', label: '★ Favorites' },
     { key: 'recent', label: 'Recently Played' },
   ];
-
   const allChips = [...builtIn, ...tags.map(t => ({ key: t, label: t }))];
 
   allChips.reverse().forEach(({ key, label }) => {
     const chip = document.createElement('button');
     chip.className = `chip${activeFilter === key ? ' active' : ''}`;
     chip.textContent = label;
-    chip.addEventListener('click', () => {
-      activeFilter = key;
-      render();
-    });
-    bar.insertBefore(chip, existingSort);
+    chip.addEventListener('click', () => { activeFilter = key; render(); });
+    bar.insertBefore(chip, sortSelect);
   });
 }
 
@@ -175,8 +170,8 @@ async function launchGame(id) {
   const g = games.find(x => x.id === id);
   if (!g) return;
 
-  if (g.launchMode === 'embed') {
-    openEmbed(g);
+  if (g.source === 'local' || g.launchMode === 'embed') {
+    await openEmbed(g);
   } else {
     chrome.tabs.create({ url: g.url });
   }
@@ -193,11 +188,30 @@ async function openEmbed(game) {
   overlay.classList.remove('hidden');
   frame.classList.add('hidden');
   fallback.classList.add('hidden');
-
   overlay.dataset.url = game.url;
+
+  // Local uploaded games play from stored HTML via a blob URL.
+  if (game.source === 'local') {
+    const html = await getLocalGameBody(game.id);
+    if (!html) {
+      fallback.classList.remove('hidden');
+      $('#embed-fallback-text').textContent = 'The uploaded game file could not be found.';
+      $('#embed-open-tab').classList.add('hidden');
+      $('#embed-fallback-open').classList.add('hidden');
+      return;
+    }
+    const blob = new Blob([html], { type: 'text/html' });
+    frame.src = URL.createObjectURL(blob);
+    frame.classList.remove('hidden');
+    return;
+  }
+
+  $('#embed-open-tab').classList.remove('hidden');
+  $('#embed-fallback-open').classList.remove('hidden');
 
   const { embeddable } = await checkEmbeddable(game.url);
   if (!embeddable) {
+    $('#embed-fallback-text').textContent = 'This site blocks embedding in iframes.';
     fallback.classList.remove('hidden');
     return;
   }
@@ -205,18 +219,21 @@ async function openEmbed(game) {
   frame.src = game.url;
   frame.classList.remove('hidden');
 
-  // Fallback: if iframe fails to load within 8 seconds, show message
   const timer = setTimeout(() => {
-    if (!frame.contentDocument?.body?.childElementCount) {
-      frame.classList.add('hidden');
-      fallback.classList.remove('hidden');
-    }
+    try {
+      if (!frame.contentDocument?.body?.childElementCount) {
+        frame.classList.add('hidden');
+        $('#embed-fallback-text').textContent = 'This site blocks embedding in iframes.';
+        fallback.classList.remove('hidden');
+      }
+    } catch { /* cross-origin frame loaded fine */ }
   }, 8000);
 
   frame.onload = () => clearTimeout(timer);
   frame.onerror = () => {
     clearTimeout(timer);
     frame.classList.add('hidden');
+    $('#embed-fallback-text').textContent = 'This site blocks embedding in iframes.';
     fallback.classList.remove('hidden');
   };
 }
@@ -224,6 +241,7 @@ async function openEmbed(game) {
 function closeEmbed() {
   const overlay = $('#embed-overlay');
   const frame = $('#embed-frame');
+  if (frame.src.startsWith('blob:')) URL.revokeObjectURL(frame.src);
   overlay.classList.add('hidden');
   frame.src = '';
 }
@@ -232,52 +250,49 @@ function closeEmbed() {
 function toggleMenu(id) {
   openMenuId = openMenuId === id ? null : id;
   render();
+  if (!openMenuId) return;
 
-  if (openMenuId) {
-    setTimeout(() => {
-      const dropdown = document.querySelector('.card-dropdown');
-      if (!dropdown) return;
-      dropdown.querySelectorAll('button').forEach(btn => {
-        btn.addEventListener('click', async (e) => {
-          e.stopPropagation();
-          const action = btn.dataset.action;
-          const gid = btn.dataset.id;
-          openMenuId = null;
+  setTimeout(() => {
+    const dropdown = document.querySelector('.card-dropdown');
+    if (!dropdown) return;
+    dropdown.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        const action = btn.dataset.action;
+        const gid = btn.dataset.id;
+        openMenuId = null;
 
-          if (action === 'edit') {
-            openEditModal(gid);
-          } else if (action === 'fav') {
-            const g = games.find(x => x.id === gid);
-            games = await updateGame(gid, { favorite: !g.favorite });
-            render();
-          } else if (action === 'mode') {
-            const g = games.find(x => x.id === gid);
-            games = await updateGame(gid, { launchMode: g.launchMode === 'tab' ? 'embed' : 'tab' });
-            render();
-          } else if (action === 'delete') {
-            if (confirm(`Delete "${games.find(x => x.id === gid)?.title}"?`)) {
-              games = await deleteGame(gid);
-              render();
-            } else {
-              render();
-            }
+        if (action === 'edit') {
+          openEditModal(gid);
+        } else if (action === 'fav') {
+          const g = games.find(x => x.id === gid);
+          games = await updateGame(gid, { favorite: !g.favorite });
+          render();
+        } else if (action === 'mode') {
+          const g = games.find(x => x.id === gid);
+          games = await updateGame(gid, { launchMode: g.launchMode === 'tab' ? 'embed' : 'tab' });
+          render();
+        } else if (action === 'delete') {
+          const g = games.find(x => x.id === gid);
+          if (confirm(`Delete "${g?.title}"?`)) {
+            games = await deleteGame(gid);
           }
-        });
+          render();
+        }
       });
-    }, 0);
-  }
+    });
+  }, 0);
 }
 
 // --- Add / Edit modal ---
 function openAddModal() {
   editingId = null;
+  pendingUpload = null;
   $('#modal-add-title').textContent = 'Add Game';
-  $('#field-url').value = '';
-  $('#field-title').value = '';
-  $('#field-desc').value = '';
-  $('#field-thumb').value = '';
-  $('#field-tags').value = '';
+  ['#field-url', '#field-title', '#field-desc', '#field-thumb', '#field-tags'].forEach(s => $(s).value = '');
   $('#field-launch').value = 'tab';
+  $('#upload-status').textContent = '';
+  $('#field-url').closest('.form-group').classList.remove('hidden');
   hideErrors();
   $('#modal-add').classList.remove('hidden');
   $('#field-url').focus();
@@ -287,13 +302,16 @@ function openEditModal(id) {
   const g = games.find(x => x.id === id);
   if (!g) return;
   editingId = id;
+  pendingUpload = null;
   $('#modal-add-title').textContent = 'Edit Game';
-  $('#field-url').value = g.url;
+  $('#field-url').value = g.source === 'local' ? '' : g.url;
   $('#field-title').value = g.title;
   $('#field-desc').value = g.description;
   $('#field-thumb').value = g.thumbnail || '';
   $('#field-tags').value = g.tags.join(', ');
   $('#field-launch').value = g.launchMode;
+  $('#upload-status').textContent = g.source === 'local' ? 'This is an uploaded local game.' : '';
+  $('#field-url').closest('.form-group').classList.toggle('hidden', g.source === 'local');
   hideErrors();
   $('#modal-add').classList.remove('hidden');
   $('#field-title').focus();
@@ -302,6 +320,7 @@ function openEditModal(id) {
 function closeAddModal() {
   $('#modal-add').classList.add('hidden');
   editingId = null;
+  pendingUpload = null;
 }
 
 function hideErrors() {
@@ -312,83 +331,84 @@ function hideErrors() {
 async function handleUrlBlur() {
   const url = $('#field-url').value.trim();
   if (!url) return;
-
   hideErrors();
 
   if (!/^https?:\/\//i.test(url)) {
-    showError('url-error', 'URL must start with http:// or https://');
+    showMsg('url-error', 'URL must start with http:// or https://');
     return;
   }
 
-  // Duplicate check
   const norm = normalizeUrl(url);
   const dup = games.find(g => g.id !== editingId && normalizeUrl(g.url) === norm);
-  if (dup) {
-    showWarning('url-warning', `Duplicate: "${dup.title}" has the same URL.`);
-  }
+  if (dup) showMsg('url-warning', `Heads up: "${dup.title}" already uses this URL.`);
 
-  // Fetch metadata if title is empty
   if (!$('#field-title').value.trim()) {
     $('#fetch-status').classList.remove('hidden');
     const meta = await fetchMetadata(url);
     $('#fetch-status').classList.add('hidden');
-
     if (meta.title) $('#field-title').value = meta.title;
     if (meta.description && !$('#field-desc').value.trim()) $('#field-desc').value = meta.description;
     if (meta.thumbnail && !$('#field-thumb').value.trim()) $('#field-thumb').value = meta.thumbnail;
   }
 }
 
-function showError(id, msg) {
+function showMsg(id, msg) {
   const el = $(`#${id}`);
   el.textContent = msg;
   el.classList.remove('hidden');
 }
 
-function showWarning(id, msg) {
-  const el = $(`#${id}`);
-  el.textContent = msg;
-  el.classList.remove('hidden');
+async function handleUploadFile(file) {
+  if (!file) return;
+  if (!/\.html?$/i.test(file.name)) {
+    $('#upload-status').textContent = 'Please choose an .html file.';
+    return;
+  }
+  const html = await file.text();
+  pendingUpload = { html, name: file.name };
+  $('#upload-status').textContent = `Loaded "${file.name}" (${(html.length / 1024).toFixed(0)} KB). It will play in an overlay.`;
+  if (!$('#field-title').value.trim()) {
+    $('#field-title').value = file.name.replace(/\.html?$/i, '');
+  }
+  $('#field-url').closest('.form-group').classList.add('hidden');
 }
 
 async function handleSave() {
-  const url = $('#field-url').value.trim();
   const title = $('#field-title').value.trim();
-
+  const url = $('#field-url').value.trim();
   hideErrors();
 
-  if (!url || !/^https?:\/\//i.test(url)) {
-    showError('url-error', 'Valid http(s) URL is required.');
-    return;
-  }
-  if (!title) {
-    showError('url-error', 'Title is required.');
-    return;
-  }
+  if (!title) { showMsg('url-error', 'Title is required.'); return; }
 
-  const tags = $('#field-tags').value
-    .split(',')
-    .map(t => t.trim().toLowerCase())
-    .filter(Boolean);
+  const tags = $('#field-tags').value.split(',').map(t => t.trim().toLowerCase()).filter(Boolean);
+  const isLocal = !!pendingUpload || (editingId && games.find(g => g.id === editingId)?.source === 'local');
+
+  if (!isLocal && (!url || !/^https?:\/\//i.test(url))) {
+    showMsg('url-error', 'Enter a valid http(s) URL, or upload a game file.');
+    return;
+  }
 
   if (editingId) {
     games = await updateGame(editingId, {
-      url,
+      url: isLocal ? undefined : url,
       title,
       description: $('#field-desc').value.trim(),
       thumbnail: $('#field-thumb').value.trim() || null,
       tags,
-      launchMode: $('#field-launch').value
+      launchMode: isLocal ? 'embed' : $('#field-launch').value
     });
   } else {
+    const id = crypto.randomUUID();
+    if (pendingUpload) await saveLocalGameBody(id, pendingUpload.html);
     const game = {
-      id: crypto.randomUUID(),
-      url,
+      id,
+      url: pendingUpload ? `local://${id}` : url,
       title,
       description: $('#field-desc').value.trim(),
       thumbnail: $('#field-thumb').value.trim() || null,
       tags,
-      launchMode: $('#field-launch').value,
+      launchMode: pendingUpload ? 'embed' : $('#field-launch').value,
+      source: pendingUpload ? 'local' : 'url',
       favorite: false,
       addedAt: new Date().toISOString(),
       lastPlayedAt: null,
@@ -401,7 +421,7 @@ async function handleSave() {
   render();
 }
 
-// --- Close menus on outside click ---
+// --- Global listeners ---
 document.addEventListener('click', (e) => {
   if (openMenuId && !e.target.closest('.card-dropdown') && !e.target.closest('.card-menu-btn')) {
     openMenuId = null;
@@ -409,77 +429,44 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// --- Keyboard shortcuts ---
 document.addEventListener('keydown', (e) => {
-  // Esc
   if (e.key === 'Escape') {
-    if (!$('#embed-overlay').classList.contains('hidden')) {
-      closeEmbed();
-      return;
-    }
-    if (!$('#modal-add').classList.contains('hidden')) {
-      closeAddModal();
-      return;
-    }
+    if (!$('#embed-overlay').classList.contains('hidden')) return closeEmbed();
+    if (!$('#modal-add').classList.contains('hidden')) return closeAddModal();
   }
-
-  // Don't handle shortcuts when typing in inputs
   if (e.target.matches('input, textarea, select')) return;
-
-  if (e.key === '/') {
-    e.preventDefault();
-    $('#search').focus();
-  } else if (e.key === 'n') {
-    e.preventDefault();
-    openAddModal();
-  }
+  if (e.key === '/') { e.preventDefault(); $('#search').focus(); }
+  else if (e.key === 'n') { e.preventDefault(); openAddModal(); }
 });
 
-// --- Events ---
-$('#search').addEventListener('input', (e) => {
-  searchQuery = e.target.value.trim();
-  render();
-});
-
-$('#sort-select').addEventListener('change', (e) => {
-  activeSort = e.target.value;
-  render();
-});
-
+$('#search').addEventListener('input', (e) => { searchQuery = e.target.value.trim(); render(); });
+$('#sort-select').addEventListener('change', (e) => { activeSort = e.target.value; render(); });
 $('#btn-add').addEventListener('click', openAddModal);
 $('#btn-add-empty').addEventListener('click', openAddModal);
-$('#btn-restore-empty').addEventListener('click', async () => {
-  games = await resetToStarter();
-  render();
-});
-
+$('#btn-restore-empty').addEventListener('click', async () => { games = await resetToStarter(); render(); });
 $('#btn-cancel-add').addEventListener('click', closeAddModal);
 $('#btn-save-add').addEventListener('click', handleSave);
 $('#field-url').addEventListener('blur', handleUrlBlur);
 $('#field-url').addEventListener('paste', () => setTimeout(handleUrlBlur, 100));
-
-$('#modal-add').addEventListener('click', (e) => {
-  if (e.target === $('#modal-add')) closeAddModal();
-});
-
+$('#btn-upload').addEventListener('click', () => $('#field-upload').click());
+$('#field-upload').addEventListener('change', (e) => handleUploadFile(e.target.files[0]));
+$('#modal-add').addEventListener('click', (e) => { if (e.target === $('#modal-add')) closeAddModal(); });
 $('#embed-close').addEventListener('click', closeEmbed);
 $('#embed-open-tab').addEventListener('click', () => {
   const url = $('#embed-overlay').dataset.url;
-  if (url) chrome.tabs.create({ url });
+  if (url && !url.startsWith('local://')) chrome.tabs.create({ url });
   closeEmbed();
 });
 $('#embed-fallback-open').addEventListener('click', () => {
   const url = $('#embed-overlay').dataset.url;
-  if (url) chrome.tabs.create({ url });
+  if (url && !url.startsWith('local://')) chrome.tabs.create({ url });
   closeEmbed();
 });
 
-// --- Helpers ---
 function escHtml(str) {
   const d = document.createElement('div');
   d.textContent = str;
   return d.innerHTML;
 }
 
-// --- Init ---
 loadAndRender();

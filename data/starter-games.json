@@ -1,109 +1,221 @@
 [
   {
-    "title": "2048",
-    "url": "https://play2048.co/",
-    "description": "Slide numbered tiles on a grid to combine them and reach 2048.",
-    "thumbnail": null,
-    "tags": ["puzzle", "classic"],
-    "launchMode": "embed"
+    "title": "Krillion",
+    "url": "https://krillion.org/",
+    "description": "Daily rare-answer trivia: everyone gets the same 7 prompts, and less common correct answers earn more points.",
+    "tags": ["trivia", "daily"],
+    "launchMode": "tab"
+  },
+  {
+    "title": "TimeGuessr",
+    "url": "https://www.timeguessr.com/",
+    "description": "Guess both where and when a historical photo was taken. Daily and endless modes.",
+    "tags": ["trivia", "daily", "geography"],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Dialed",
+    "url": "https://dialed.gg/",
+    "description": "A suite of quick daily memory games — recreate a color, a sound, or a pattern from memory.",
+    "tags": ["trivia", "daily", "memory"],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Framed",
+    "url": "https://framed.wtf/",
+    "description": "The daily movie guessing game: identify the film from a single frame, then more frames as hints.",
+    "tags": ["trivia", "daily", "movies"],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Gamedle",
+    "url": "https://www.gamedle.wtf/",
+    "description": "Guess the video game from its cover art, artwork, or keywords. Daily and unlimited modes.",
+    "tags": ["trivia", "daily", "video-games"],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Chronophoto",
+    "url": "https://chronophoto.app/",
+    "description": "Estimate the year each photograph was taken. The closer your guess, the more points.",
+    "tags": ["trivia", "daily", "history"],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Worldle",
+    "url": "https://worldle.teuteuf.fr/",
+    "description": "Identify the country from its silhouette in six guesses, with distance and direction clues.",
+    "tags": ["trivia", "daily", "geography"],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Globle",
+    "url": "https://globle-game.com/",
+    "description": "Guess the mystery country; each guess is color-coded by how close it is on the globe.",
+    "tags": ["trivia", "daily", "geography"],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Flagle",
+    "url": "https://www.flagle.io/",
+    "description": "Guess the country from a flag revealed one tile at a time.",
+    "tags": ["trivia", "daily", "geography"],
+    "launchMode": "tab",
+    "verify": true
+  },
+  {
+    "title": "Travle",
+    "url": "https://travle.earth/",
+    "description": "Connect a start country to a destination by naming the countries in between.",
+    "tags": ["trivia", "daily", "geography"],
+    "launchMode": "tab",
+    "verify": true
+  },
+  {
+    "title": "Tradle",
+    "url": "https://games.oec.world/en/tradle/",
+    "description": "Guess the country from a breakdown of its biggest exports.",
+    "tags": ["trivia", "daily", "geography"],
+    "launchMode": "tab",
+    "verify": true
+  },
+  {
+    "title": "Bandle",
+    "url": "https://bandle.app/",
+    "description": "Guess the song as instruments are added one at a time — a daily music puzzle.",
+    "tags": ["trivia", "daily", "music"],
+    "launchMode": "tab",
+    "verify": true
+  },
+  {
+    "title": "Costcodle",
+    "url": "https://costcodle.com/",
+    "description": "Guess the price of a Costco product in six tries.",
+    "tags": ["trivia", "daily"],
+    "launchMode": "tab",
+    "verify": true
+  },
+  {
+    "title": "PokeDoku",
+    "url": "https://pokedoku.com/",
+    "description": "A daily Pokémon trivia grid — name a Pokémon matching each row/column pair.",
+    "tags": ["trivia", "daily", "video-games"],
+    "launchMode": "tab",
+    "verify": true
+  },
+  {
+    "title": "Immaculate Grid",
+    "url": "https://www.sports-reference.com/immaculate-grid/",
+    "description": "Daily sports trivia grid: name a player matching each row and column criteria.",
+    "tags": ["trivia", "daily", "sports"],
+    "launchMode": "tab"
+  },
+  {
+    "title": "GeoGuessr",
+    "url": "https://www.geoguessr.com/",
+    "description": "Dropped into Street View somewhere in the world — guess where you are on the map.",
+    "tags": ["trivia", "geography"],
+    "launchMode": "tab",
+    "verify": true
   },
   {
     "title": "Wordle",
     "url": "https://www.nytimes.com/games/wordle/index.html",
     "description": "Guess the five-letter word in six tries with color-coded clues.",
-    "thumbnail": null,
     "tags": ["word", "daily"],
     "launchMode": "tab"
   },
   {
+    "title": "Connections",
+    "url": "https://www.nytimes.com/games/connections",
+    "description": "Sort 16 words into four hidden groups without making four mistakes.",
+    "tags": ["word", "daily", "puzzle"],
+    "launchMode": "tab"
+  },
+  {
+    "title": "The Mini Crossword",
+    "url": "https://www.nytimes.com/crosswords/game/mini",
+    "description": "A bite-size daily crossword you can solve in under a minute.",
+    "tags": ["word", "daily", "puzzle"],
+    "launchMode": "tab"
+  },
+  {
+    "title": "2048",
+    "url": "https://play2048.co/",
+    "description": "Slide numbered tiles to combine them and reach the 2048 tile.",
+    "tags": ["puzzle", "classic"],
+    "launchMode": "embed"
+  },
+  {
     "title": "Tetris",
     "url": "https://tetris.com/play-tetris",
-    "description": "The classic falling-blocks puzzle game.",
-    "thumbnail": null,
+    "description": "The classic falling-blocks puzzle.",
     "tags": ["puzzle", "classic", "arcade"],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Sudoku",
+    "url": "https://sudoku.com/",
+    "description": "Fill the grid so every row, column, and box contains 1–9.",
+    "tags": ["puzzle", "classic"],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Minesweeper",
+    "url": "https://minesweeper.online/",
+    "description": "Clear the board without detonating any hidden mines.",
+    "tags": ["puzzle", "classic"],
+    "launchMode": "embed",
+    "verify": true
+  },
+  {
+    "title": "Little Alchemy 2",
+    "url": "https://littlealchemy2.com/",
+    "description": "Combine elements to discover new items — over 700 to find.",
+    "tags": ["puzzle", "casual"],
+    "launchMode": "embed"
+  },
+  {
+    "title": "Cookie Clicker",
+    "url": "https://orteil.dashnet.org/cookieclicker/",
+    "description": "Click the cookie, then build an automated baking empire.",
+    "tags": ["idle", "clicker"],
+    "launchMode": "embed"
+  },
+  {
+    "title": "Hextris",
+    "url": "https://hextris.io/",
+    "description": "A fast, addictive hexagonal spin on Tetris.",
+    "tags": ["puzzle", "arcade"],
+    "launchMode": "embed",
+    "verify": true
+  },
+  {
+    "title": "Chess.com",
+    "url": "https://www.chess.com/play/online",
+    "description": "Play chess online against people worldwide or the computer.",
+    "tags": ["strategy", "multiplayer", "classic"],
     "launchMode": "tab"
   },
   {
     "title": "Slither.io",
     "url": "https://slither.io/",
     "description": "Grow your snake by eating glowing orbs in a multiplayer arena.",
-    "thumbnail": null,
     "tags": ["multiplayer", "arcade"],
-    "launchMode": "tab"
-  },
-  {
-    "title": "Chess.com",
-    "url": "https://www.chess.com/play/online",
-    "description": "Play chess online against players worldwide or the computer.",
-    "thumbnail": null,
-    "tags": ["strategy", "multiplayer", "classic"],
     "launchMode": "tab"
   },
   {
     "title": "Agar.io",
     "url": "https://agar.io/",
-    "description": "Eat smaller cells and avoid bigger ones in this multiplayer game.",
-    "thumbnail": null,
+    "description": "Eat smaller cells and dodge bigger ones to grow in a shared arena.",
     "tags": ["multiplayer", "arcade"],
     "launchMode": "tab"
-  },
-  {
-    "title": "Cookie Clicker",
-    "url": "https://orteil.dashnet.org/cookieclicker/",
-    "description": "Click the cookie to earn more cookies, then automate the baking empire.",
-    "thumbnail": null,
-    "tags": ["idle", "clicker"],
-    "launchMode": "embed"
   },
   {
     "title": "Krunker.io",
     "url": "https://krunker.io/",
-    "description": "Fast-paced multiplayer first-person shooter in the browser.",
-    "thumbnail": null,
+    "description": "Fast, blocky multiplayer first-person shooter in the browser.",
     "tags": ["shooter", "multiplayer"],
     "launchMode": "tab"
-  },
-  {
-    "title": "GeoGuessr",
-    "url": "https://www.geoguessr.com/",
-    "description": "Guess locations around the world from Google Street View.",
-    "thumbnail": null,
-    "tags": ["trivia", "geography"],
-    "launchMode": "tab",
-    "verify": true
-  },
-  {
-    "title": "Hole.io",
-    "url": "https://hole-io.com/",
-    "description": "Control a black hole swallowing everything in a city.",
-    "thumbnail": null,
-    "tags": ["arcade", "casual"],
-    "launchMode": "tab",
-    "verify": true
-  },
-  {
-    "title": "Little Alchemy 2",
-    "url": "https://littlealchemy2.com/",
-    "description": "Combine elements to discover new items — 700+ to find.",
-    "thumbnail": null,
-    "tags": ["puzzle", "casual"],
-    "launchMode": "embed"
-  },
-  {
-    "title": "Hacker Typer",
-    "url": "https://hackertyper.net/",
-    "description": "Mash the keyboard and look like a movie hacker.",
-    "thumbnail": null,
-    "tags": ["joke", "casual"],
-    "launchMode": "embed"
-  },
-  {
-    "title": "Powerline.io",
-    "url": "https://powerline.io/",
-    "description": "Multiplayer snake game with neon visuals on a dark grid.",
-    "thumbnail": null,
-    "tags": ["multiplayer", "arcade"],
-    "launchMode": "tab",
-    "verify": true
   }
 ]

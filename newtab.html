@@ -67,6 +67,12 @@
           <option value="embed">Embed in overlay</option>
         </select>
       </div>
+      <div class="upload-row">
+        <span class="upload-label">Or upload your own game:</span>
+        <button class="btn btn-ghost btn-small" id="btn-upload" type="button">Upload .html file</button>
+        <input type="file" id="field-upload" accept=".html,.htm,text/html" hidden>
+      </div>
+      <div class="upload-status" id="upload-status"></div>
       <div id="fetch-status" class="hidden"><span class="spinner"></span> Fetching metadata…</div>
       <div class="form-actions">
         <button class="btn btn-ghost" id="btn-cancel-add">Cancel</button>
@@ -84,7 +90,7 @@
     </div>
     <iframe class="embed-frame hidden" id="embed-frame" sandbox="allow-scripts allow-same-origin allow-popups allow-forms"></iframe>
     <div class="embed-fallback hidden" id="embed-fallback">
-      <p>This site blocks embedding in iframes.</p>
+      <p id="embed-fallback-text">This site blocks embedding in iframes.</p>
       <button class="btn btn-primary" id="embed-fallback-open">Open in a new tab instead</button>
     </div>
   </div>

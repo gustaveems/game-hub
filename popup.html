@@ -5,70 +5,158 @@
   <style>
     :root {
       --bg: #1a1a2e;
+      --bg-card: #16213e;
+      --bg-card-hover: #1a2745;
       --text: #e0e0e0;
       --text-muted: #8892a4;
+      --text-heading: #ffffff;
       --accent: #4fc3f7;
       --accent-hover: #81d4fa;
       --border: #2a3a5c;
       --bg-input: #0f1729;
       --success: #66bb6a;
       --danger: #ef5350;
+      --star: #ffd54f;
       --font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
     @media (prefers-color-scheme: light) {
       :root {
         --bg: #ffffff;
+        --bg-card: #f4f6fa;
+        --bg-card-hover: #e9eefb;
         --text: #333333;
         --text-muted: #777777;
+        --text-heading: #111111;
         --accent: #1976d2;
         --accent-hover: #1565c0;
         --border: #dde0e4;
         --bg-input: #f0f0f0;
         --success: #388e3c;
         --danger: #d32f2f;
+        --star: #f9a825;
       }
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      width: 320px;
-      padding: 16px;
+      width: 340px;
       font-family: var(--font);
       background: var(--bg);
       color: var(--text);
+      padding: 14px;
     }
-    h2 { font-size: 1rem; margin-bottom: 12px; }
-    .field { margin-bottom: 10px; }
-    .field label { display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 3px; }
-    .field input {
-      width: 100%; padding: 6px 10px; border: 1px solid var(--border);
+    .pop-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .pop-header h1 { font-size: 1.05rem; color: var(--text-heading); }
+    .pop-header .count { font-size: 0.72rem; color: var(--text-muted); }
+
+    .section-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin: 10px 0 6px;
+    }
+
+    /* Favorites grid */
+    .fav-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+    }
+    .fav-tile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      padding: 8px 2px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-card);
+      cursor: pointer;
+      transition: background 0.12s, transform 0.12s;
+    }
+    .fav-tile:hover { background: var(--bg-card-hover); transform: translateY(-1px); }
+    .fav-logo {
+      width: 32px; height: 32px; border-radius: 7px;
+      object-fit: contain; background: rgba(255,255,255,0.95); padding: 3px;
+    }
+    .fav-logo-fallback {
+      width: 32px; height: 32px; border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; font-weight: 700; color: #fff;
+    }
+    .fav-name {
+      font-size: 0.6rem; text-align: center; color: var(--text);
+      line-height: 1.1; max-width: 100%;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .fav-empty { font-size: 0.78rem; color: var(--text-muted); padding: 6px 0; }
+
+    /* Quick add */
+    .add-row { display: flex; gap: 6px; }
+    .add-row input {
+      flex: 1; padding: 7px 10px; border: 1px solid var(--border);
       border-radius: 6px; background: var(--bg-input); color: var(--text);
-      font-size: 0.85rem; font-family: var(--font);
+      font-size: 0.82rem; font-family: var(--font); outline: none;
     }
+    .add-row input:focus { border-color: var(--accent); }
+
     .btn {
-      width: 100%; padding: 8px; border: none; border-radius: 6px;
-      font-size: 0.85rem; cursor: pointer; font-family: var(--font);
-      background: var(--accent); color: #111; font-weight: 600;
+      padding: 7px 12px; border: none; border-radius: 6px;
+      font-size: 0.82rem; cursor: pointer; font-family: var(--font);
+      transition: background 0.12s;
     }
-    .btn:hover { background: var(--accent-hover); }
-    .msg { font-size: 0.8rem; margin-top: 8px; text-align: center; }
+    .btn-primary { background: var(--accent); color: #111; font-weight: 600; }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-ghost { background: transparent; color: var(--text-muted); border: 1px solid var(--border); }
+    .btn-ghost:hover { background: var(--bg-card); color: var(--text); }
+    .btn-block { width: 100%; }
+
+    .secondary-actions { display: flex; gap: 6px; margin-top: 6px; }
+    .secondary-actions .btn { flex: 1; font-size: 0.76rem; padding: 6px; }
+
+    .msg { font-size: 0.75rem; margin-top: 6px; min-height: 1em; }
     .msg.ok { color: var(--success); }
     .msg.err { color: var(--danger); }
-    .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.6s linear infinite; }
-    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .pop-footer { margin-top: 14px; }
+    .open-library {
+      width: 100%; padding: 10px; border: none; border-radius: 8px;
+      background: var(--accent); color: #111; font-weight: 700;
+      font-size: 0.88rem; cursor: pointer; font-family: var(--font);
+    }
+    .open-library:hover { background: var(--accent-hover); }
   </style>
 </head>
 <body>
-  <h2>🎮 Add Current Tab</h2>
-  <div class="field">
-    <label>URL</label>
-    <input type="text" id="p-url" readonly>
+  <div class="pop-header">
+    <h1>🎮 Game Hub</h1>
+    <span class="count" id="count"></span>
   </div>
-  <div class="field">
-    <label>Title</label>
-    <input type="text" id="p-title">
+
+  <div class="section-label">Favorites</div>
+  <div class="fav-grid" id="fav-grid"></div>
+
+  <div class="section-label">Quick add</div>
+  <div class="add-row">
+    <input type="text" id="add-url" placeholder="Paste a game URL…" autocomplete="off">
+    <button class="btn btn-primary" id="btn-add-url">Add</button>
   </div>
-  <button class="btn" id="p-add">Add to Game Hub</button>
-  <div class="msg" id="p-msg"></div>
+  <div class="secondary-actions">
+    <button class="btn btn-ghost" id="btn-add-current">+ Current tab</button>
+    <button class="btn btn-ghost" id="btn-upload">↑ Upload .html</button>
+    <input type="file" id="file-upload" accept=".html,.htm,text/html" hidden>
+  </div>
+  <div class="msg" id="msg"></div>
+
+  <div class="pop-footer">
+    <button class="open-library" id="btn-open-library">Open Full Library →</button>
+  </div>
+
   <script type="module" src="popup.js"></script>
 </body>
 </html>
