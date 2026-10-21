@@ -26,9 +26,11 @@ Click the Game Hub icon in the toolbar to get a compact panel with:
 - **Card menu (⋮)** — Edit, Delete, Toggle favorite, Switch launch mode.
 - **+ Add Game** — opens a modal with URL metadata auto-fetch, duplicate warnings, tag input, launch-mode toggle, and an **Upload .html** option.
 
-## Logos
+## Logos & Artwork Caching
 
-Game logos come from the site's favicon via Google's favicon image service (an image URL, not a script — no remote code runs). If a game has an explicit `og:image` thumbnail it's used instead. If both fail, a colored tile with the title's initials is shown.
+Each game shows its `og:image` artwork when available, otherwise the site's favicon (via Google's favicon image service — an image URL, not a script, so no remote code runs), and finally a colored tile with the title's initials.
+
+Artwork is **cached the first time you see it**: the image is fetched once, converted to a data URL, and stored in `chrome.storage.local` keyed by game id. After that the new-tab page renders instantly from the cache and keeps working even if a site changes or removes its image (link rot). The cache self-prunes when you delete games, refreshes automatically if you change a game's thumbnail URL, and can be cleared from the Options page.
 
 ## Launch Modes
 
@@ -51,6 +53,7 @@ Game logos come from the site's favicon via Google's favicon image service (an i
 - **Export** library as JSON
 - **Import** from JSON (replaces the library; invalid entries are skipped with a report)
 - **Reset** to the starter list
+- **Clear image cache** (frees space / forces artwork to re-download)
 - **Storage usage** readout
 
 ## Known Limitations

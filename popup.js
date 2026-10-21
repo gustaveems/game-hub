@@ -1,15 +1,23 @@
 import {
-  getGames, addGame, recordPlay, normalizeUrl, pickFavorites, saveLocalGameBody
+  getGames, addGame, recordPlay, normalizeUrl, pickFavorites, saveLocalGameBody,
+  getThumbCache
 } from './lib/storage.js';
 import { faviconUrl, hashColor, initials } from './lib/logo.js';
 
 const $ = (s) => document.querySelector(s);
 let games = [];
+let thumbCache = {};
 
 async function init() {
   games = await getGames();
   $('#count').textContent = `${games.length} game${games.length === 1 ? '' : 's'}`;
+  thumbCache = await getThumbCache(games.map(g => g.id));
   renderFavorites();
+}
+
+function thumbSrc(g) {
+  const c = thumbCache[g.id];
+  return (c && c.src === g.thumbnail) ? c.data : g.thumbnail;
 }
 
 function renderFavorites() {
@@ -23,7 +31,7 @@ function renderFavorites() {
 
   grid.innerHTML = favs.map(g => {
     const thumb = g.thumbnail
-      ? `<img class="cover" data-id="${g.id}" src="${esc(g.thumbnail)}" alt="">`
+      ? `<img class="cover" data-id="${g.id}" src="${esc(thumbSrc(g))}" alt="">`
       : logoMarkup(g);
     return `<div class="fav-row" data-id="${g.id}" title="${esc(g.title)}">
       <div class="fav-thumb">${thumb}</div>

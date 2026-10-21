@@ -1,4 +1,4 @@
-import { exportGames, importGames, resetToStarter, getStorageUsage } from './lib/storage.js';
+import { exportGames, importGames, resetToStarter, getStorageUsage, clearThumbCache } from './lib/storage.js';
 
 const $ = (s) => document.querySelector(s);
 
@@ -52,6 +52,15 @@ $('#file-import').addEventListener('change', async (e) => {
   }
 
   e.target.value = '';
+});
+
+$('#btn-clear-cache').addEventListener('click', async () => {
+  const n = await clearThumbCache();
+  $('#cache-msg').textContent = n > 0
+    ? `Cleared ${n} cached image${n === 1 ? '' : 's'}. They'll re-download next time you open a new tab.`
+    : 'Image cache is already empty.';
+  $('#cache-msg').className = 'msg ok';
+  showUsage();
 });
 
 $('#btn-reset').addEventListener('click', async () => {

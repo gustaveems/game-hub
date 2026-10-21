@@ -1,12 +1,14 @@
 import {
   getGames, addGame, updateGame, deleteGame, recordPlay,
-  resetToStarter, normalizeUrl, saveLocalGameBody, getLocalGameBody
+  resetToStarter, normalizeUrl, saveLocalGameBody, getLocalGameBody,
+  getThumbCache, setThumbCache, pruneThumbCache
 } from './lib/storage.js';
 import { fetchMetadata } from './lib/metadata.js';
 import { checkEmbeddable } from './lib/embed.js';
 import { faviconUrl, hashColor, initials } from './lib/logo.js';
 
 let games = [];
+let thumbCache = {}; // { [gameId]: { src, data } } — artwork cached as data URLs
 let activeFilter = 'all';
 let activeSort = 'title';
 let searchQuery = '';
@@ -18,7 +20,51 @@ const $ = (sel) => document.querySelector(sel);
 
 async function loadAndRender() {
   games = await getGames();
+  thumbCache = await getThumbCache(games.map(g => g.id));
   render();
+  pruneThumbCache(games.map(g => g.id));
+  ensureThumbsCached();
+}
+
+// Serve a game's artwork from cache when it matches, else the remote URL.
+function thumbSrc(g) {
+  const c = thumbCache[g.id];
+  return (c && c.src === g.thumbnail) ? c.data : g.thumbnail;
+}
+
+function blobToDataUrl(blob) {
+  return new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload = () => resolve(r.result);
+    r.onerror = reject;
+    r.readAsDataURL(blob);
+  });
+}
+
+// Fetch any uncached artwork once and store it as a data URL for next time.
+async function ensureThumbsCached() {
+  const pending = games.filter(g =>
+    g.thumbnail && !(thumbCache[g.id] && thumbCache[g.id].src === g.thumbnail)
+  );
+  if (pending.length === 0) return;
+
+  let i = 0;
+  const worker = async () => {
+    while (i < pending.length) {
+      const g = pending[i++];
+      try {
+        const res = await fetch(g.thumbnail);
+        if (!res.ok) continue;
+        const blob = await res.blob();
+        if (!blob.type.startsWith('image/') || blob.size > 1_500_000) continue;
+        const dataUrl = await blobToDataUrl(blob);
+        thumbCache[g.id] = { src: g.thumbnail, data: dataUrl };
+        await setThumbCache(g.id, g.thumbnail, dataUrl);
+      } catch { /* leave uncached; remote URL / favicon still render */ }
+    }
+  };
+  // Small concurrency cap so we don't fire dozens of fetches at once.
+  await Promise.all(Array.from({ length: 4 }, worker));
 }
 
 function getFilteredGames() {
@@ -176,7 +222,7 @@ function renderDailies(show) {
   strip.innerHTML = ordered.map(g => {
     const played = isPlayedToday(g);
     const inner = g.thumbnail
-      ? `<img class="cover" data-id="${g.id}" src="${escHtml(g.thumbnail)}" alt="">`
+      ? `<img class="cover" data-id="${g.id}" src="${escHtml(thumbSrc(g))}" alt="">`
       : logoTileHTML(g);
     return `<div class="daily-tile${played ? ' played' : ''}" data-id="${g.id}" title="${escHtml(g.title)}">
       <div class="daily-thumb">${inner}</div>
@@ -211,7 +257,7 @@ function logoTileHTML(g) {
 function thumbHTML(g) {
   // Artwork thumbnail if present (fallback wired in render()); else favicon tile.
   if (g.thumbnail) {
-    return `<img class="cover" data-id="${g.id}" src="${escHtml(g.thumbnail)}" alt="" loading="lazy">`;
+    return `<img class="cover" data-id="${g.id}" src="${escHtml(thumbSrc(g))}" alt="" loading="lazy">`;
   }
   return logoTileHTML(g);
 }
