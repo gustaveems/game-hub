@@ -180,6 +180,111 @@ body {
   cursor: pointer;
 }
 
+/* Today's Dailies strip */
+.dailies {
+  padding: 10px 0 2px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.dailies-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.dailies-title {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+.dailies-count { font-size: 0.78rem; color: var(--accent); font-weight: 600; }
+
+.dailies-strip {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scrollbar-width: thin;
+}
+.dailies-strip::-webkit-scrollbar { height: 7px; }
+.dailies-strip::-webkit-scrollbar-thumb { background: var(--border); border-radius: 999px; }
+
+.daily-tile {
+  flex: 0 0 auto;
+  width: 96px;
+  cursor: pointer;
+  text-align: center;
+  position: relative;
+  transition: transform 0.1s;
+}
+.daily-tile:hover { transform: translateY(-2px); }
+
+.daily-thumb {
+  width: 96px;
+  height: 58px;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-input);
+  border: 1px solid var(--border-soft);
+}
+.daily-thumb img.cover { width: 100%; height: 100%; object-fit: cover; }
+
+.daily-name {
+  font-size: 0.72rem;
+  color: var(--text);
+  margin-top: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.daily-check {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 0.7rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+.daily-tile.played .daily-thumb { opacity: 0.42; }
+.daily-tile.played .daily-name { color: var(--text-muted); }
+
+/* Section headers */
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  margin: 22px 2px 2px;
+}
+.section-head:first-child { margin-top: 8px; }
+.section-name {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  color: var(--text-heading);
+}
+.section-count {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  background: var(--bg-row);
+  border: 1px solid var(--border-soft);
+  border-radius: 999px;
+  padding: 1px 8px;
+}
+
 /* List */
 .game-list {
   display: flex;

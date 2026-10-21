@@ -58,9 +58,40 @@ function getAllTags() {
   return [...set].sort();
 }
 
+// Games are grouped into the first category whose rule they match.
+const CATEGORIES = [
+  ['Your Uploads',      g => g.source === 'local'],
+  ['Trivia & Guessing', g => g.tags.includes('trivia')],
+  ['Word & Number',     g => g.tags.some(t => ['word', 'math', 'spelling'].includes(t))],
+  ['Puzzle & Logic',    g => g.tags.some(t => ['puzzle', 'logic'].includes(t))],
+  ['Multiplayer & .io', g => g.tags.some(t => ['multiplayer', 'io'].includes(t))],
+  ['Arcade & Classic',  g => g.tags.some(t => ['arcade', 'classic', 'shooter', 'racing', 'skill'].includes(t))],
+  ['Idle & Sandbox',    g => g.tags.some(t => ['idle', 'clicker', 'sandbox', 'rpg', 'adventure', 'text', 'creative'].includes(t))],
+];
+const FALLBACK_CATEGORY = 'More Games';
+
+function categoryOf(g) {
+  for (const [name, rule] of CATEGORIES) if (rule(g)) return name;
+  return FALLBACK_CATEGORY;
+}
+
+function isPlayedToday(g) {
+  return g.lastPlayedAt && new Date(g.lastPlayedAt).toDateString() === new Date().toDateString();
+}
+
+function sortGames(list) {
+  const l = [...list];
+  if (activeSort === 'title') l.sort((a, b) => a.title.localeCompare(b.title));
+  else if (activeSort === 'added') l.sort((a, b) => new Date(b.addedAt) - new Date(a.addedAt));
+  else if (activeSort === 'played') l.sort((a, b) => b.playCount - a.playCount);
+  return l;
+}
+
 function render() {
   renderFilterBar();
-  const filtered = getFilteredGames();
+  const defaultView = activeFilter === 'all' && !searchQuery;
+  renderDailies(defaultView);
+
   const list = $('#game-list');
   const empty = $('#empty-state');
 
@@ -73,34 +104,95 @@ function render() {
   empty.classList.add('hidden');
   list.classList.remove('hidden');
 
-  if (filtered.length === 0) {
-    list.innerHTML = '<p class="no-match">No games match your search or filter.</p>';
-    return;
+  if (defaultView) {
+    // Grouped-by-category view.
+    const order = [...CATEGORIES.map(c => c[0]), FALLBACK_CATEGORY];
+    const buckets = {};
+    games.forEach(g => { (buckets[categoryOf(g)] ||= []).push(g); });
+    list.innerHTML = order
+      .filter(name => buckets[name]?.length)
+      .map(name => {
+        const rows = sortGames(buckets[name]).map(rowHTML).join('');
+        return `<div class="section-head"><span class="section-name">${escHtml(name)}</span><span class="section-count">${buckets[name].length}</span></div>${rows}`;
+      })
+      .join('');
+  } else {
+    const filtered = getFilteredGames();
+    if (filtered.length === 0) {
+      list.innerHTML = '<p class="no-match">No games match your search or filter.</p>';
+      return;
+    }
+    list.innerHTML = filtered.map(rowHTML).join('');
   }
 
-  list.innerHTML = filtered.map(rowHTML).join('');
+  wireRows(list);
+}
 
-  list.querySelectorAll('.game-row').forEach(row => {
-    const id = row.dataset.id;
+function wireRows(container) {
+  container.querySelectorAll('.game-row').forEach(row => {
     row.addEventListener('click', (e) => {
       if (e.target.closest('.row-menu-btn') || e.target.closest('.card-dropdown')) return;
-      launchGame(id);
+      launchGame(row.dataset.id);
     });
   });
-
-  list.querySelectorAll('.row-menu-btn').forEach(btn => {
+  container.querySelectorAll('.row-menu-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
       toggleMenu(btn.dataset.id);
     });
   });
-
   // If a game's artwork fails to load, swap in the favicon/initials tile.
-  list.querySelectorAll('img.cover[data-id]').forEach(img => {
+  container.querySelectorAll('img.cover[data-id]').forEach(img => {
     img.addEventListener('error', () => {
       const g = games.find(x => x.id === img.dataset.id);
       const thumb = img.closest('.row-thumb');
       if (g && thumb) thumb.innerHTML = logoTileHTML(g);
+    });
+  });
+}
+
+// Horizontal strip of daily games with a played-today indicator.
+function renderDailies(show) {
+  const wrap = $('#dailies');
+  const strip = $('#dailies-strip');
+  const dailies = games.filter(g => g.tags.includes('daily'));
+
+  if (!show || dailies.length === 0) {
+    wrap.classList.add('hidden');
+    return;
+  }
+  wrap.classList.remove('hidden');
+
+  const playedCount = dailies.filter(isPlayedToday).length;
+  $('#dailies-count').textContent = `${playedCount} of ${dailies.length} played today`;
+
+  // Unplayed first, each group alphabetical.
+  const ordered = [...dailies].sort((a, b) => {
+    const pa = isPlayedToday(a), pb = isPlayedToday(b);
+    if (pa !== pb) return pa ? 1 : -1;
+    return a.title.localeCompare(b.title);
+  });
+
+  strip.innerHTML = ordered.map(g => {
+    const played = isPlayedToday(g);
+    const inner = g.thumbnail
+      ? `<img class="cover" data-id="${g.id}" src="${escHtml(g.thumbnail)}" alt="">`
+      : logoTileHTML(g);
+    return `<div class="daily-tile${played ? ' played' : ''}" data-id="${g.id}" title="${escHtml(g.title)}">
+      <div class="daily-thumb">${inner}</div>
+      <div class="daily-name">${escHtml(g.title)}</div>
+      ${played ? '<span class="daily-check">✓</span>' : ''}
+    </div>`;
+  }).join('');
+
+  strip.querySelectorAll('.daily-tile').forEach(tile => {
+    tile.addEventListener('click', () => launchGame(tile.dataset.id));
+  });
+  strip.querySelectorAll('img.cover[data-id]').forEach(img => {
+    img.addEventListener('error', () => {
+      const g = games.find(x => x.id === img.dataset.id);
+      const box = img.closest('.daily-thumb');
+      if (g && box) box.innerHTML = logoTileHTML(g);
     });
   });
 }
@@ -192,6 +284,7 @@ async function launchGame(id) {
     chrome.tabs.create({ url: g.url });
   }
   games = await recordPlay(id);
+  render();
 }
 
 async function openEmbed(game) {
