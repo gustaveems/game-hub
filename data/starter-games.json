@@ -4,7 +4,10 @@
     "url": "https://krillion.org/play/daily/",
     "description": "Daily rare-answer trivia: everyone gets the same 7 prompts, and less common correct answers earn more points.",
     "thumbnail": "https://www.krillion.org/krillion-homepage-reference.png",
-    "tags": ["trivia", "daily"],
+    "tags": [
+      "trivia",
+      "daily"
+    ],
     "launchMode": "tab"
   },
   {
@@ -12,7 +15,11 @@
     "url": "https://www.timeguessr.com/",
     "description": "Guess both where and when a historical photo was taken. Daily and endless modes.",
     "thumbnail": "https://timeguessr.com/og-default.png",
-    "tags": ["trivia", "daily", "geography"],
+    "tags": [
+      "trivia",
+      "daily",
+      "geography"
+    ],
     "launchMode": "tab"
   },
   {
@@ -20,7 +27,11 @@
     "url": "https://dialed.gg/",
     "description": "A suite of quick daily memory games — recreate a color, a sound, or a pattern from memory.",
     "thumbnail": "https://dialed.gg/api/site/og-image",
-    "tags": ["trivia", "daily", "memory"],
+    "tags": [
+      "trivia",
+      "daily",
+      "memory"
+    ],
     "launchMode": "tab"
   },
   {
@@ -28,7 +39,11 @@
     "url": "https://framed.wtf/",
     "description": "The daily movie guessing game: identify the film from a single frame, then more frames as hints.",
     "thumbnail": "https://framed.wtf/icons/og-image-details.png",
-    "tags": ["trivia", "daily", "movies"],
+    "tags": [
+      "trivia",
+      "daily",
+      "movies"
+    ],
     "launchMode": "tab"
   },
   {
@@ -36,7 +51,11 @@
     "url": "https://www.gamedle.wtf/",
     "description": "Guess the video game from its cover art, artwork, or keywords. Daily and unlimited modes.",
     "thumbnail": "https://www.gamedle.wtf/images/gamedle.webp",
-    "tags": ["trivia", "daily", "video-games"],
+    "tags": [
+      "trivia",
+      "daily",
+      "video-games"
+    ],
     "launchMode": "tab"
   },
   {
@@ -44,7 +63,11 @@
     "url": "https://chronophoto.app/",
     "description": "Estimate the year each photograph was taken. The closer your guess, the more points.",
     "thumbnail": "https://www.chronophoto.app/og-image.png",
-    "tags": ["trivia", "daily", "history"],
+    "tags": [
+      "trivia",
+      "daily",
+      "history"
+    ],
     "launchMode": "tab"
   },
   {
@@ -52,7 +75,11 @@
     "url": "https://worldle.teuteuf.fr/",
     "description": "Identify the country from its silhouette in six guesses, with distance and direction clues.",
     "thumbnail": "https://worldle.teuteuf.fr/og-image.jpg",
-    "tags": ["trivia", "daily", "geography"],
+    "tags": [
+      "trivia",
+      "daily",
+      "geography"
+    ],
     "launchMode": "tab"
   },
   {
@@ -60,7 +87,11 @@
     "url": "https://globle-game.com/",
     "description": "Guess the mystery country; each guess is color-coded by how close it is on the globe.",
     "thumbnail": "https://globle-game.com/globle-preview.png",
-    "tags": ["trivia", "daily", "geography"],
+    "tags": [
+      "trivia",
+      "daily",
+      "geography"
+    ],
     "launchMode": "tab"
   },
   {
@@ -68,7 +99,11 @@
     "url": "https://www.flagle.io/",
     "description": "Guess the country from a flag revealed one tile at a time.",
     "thumbnail": "https://www.flagle.io/images/flagle_og.png",
-    "tags": ["trivia", "daily", "geography"],
+    "tags": [
+      "trivia",
+      "daily",
+      "geography"
+    ],
     "launchMode": "tab",
     "verify": true
   },
@@ -77,7 +112,11 @@
     "url": "https://travle.earth/",
     "description": "Connect a start country to a destination by naming the countries in between.",
     "thumbnail": "https://travle.earth/images/previews/countries_preview.png",
-    "tags": ["trivia", "daily", "geography"],
+    "tags": [
+      "trivia",
+      "daily",
+      "geography"
+    ],
     "launchMode": "tab",
     "verify": true
   },
@@ -86,7 +125,11 @@
     "url": "https://games.oec.world/en/tradle/",
     "description": "Guess the country from a breakdown of its biggest exports.",
     "thumbnail": null,
-    "tags": ["trivia", "daily", "geography"],
+    "tags": [
+      "trivia",
+      "daily",
+      "geography"
+    ],
     "launchMode": "tab",
     "verify": true
   },
@@ -95,7 +138,11 @@
     "url": "https://bandle.app/",
     "description": "Guess the song as instruments are added one at a time — a daily music puzzle.",
     "thumbnail": "https://bandle.app/og-cover.png",
-    "tags": ["trivia", "daily", "music"],
+    "tags": [
+      "trivia",
+      "daily",
+      "music"
+    ],
     "launchMode": "tab",
     "verify": true
   },
@@ -104,7 +151,10 @@
     "url": "https://costcodle.com/",
     "description": "Guess the price of a Costco product in six tries.",
     "thumbnail": null,
-    "tags": ["trivia", "daily"],
+    "tags": [
+      "trivia",
+      "daily"
+    ],
     "launchMode": "tab",
     "verify": true
   },
@@ -113,7 +163,11 @@
     "url": "https://pokedoku.com/",
     "description": "A daily Pokémon trivia grid — name a Pokémon matching each row/column pair.",
     "thumbnail": "https://pokedoku.com/opengraph-image.png?109d0a8212e5685b",
-    "tags": ["trivia", "daily", "video-games"],
+    "tags": [
+      "trivia",
+      "daily",
+      "video-games"
+    ],
     "launchMode": "tab",
     "verify": true
   },
@@ -122,7 +176,11 @@
     "url": "https://www.sports-reference.com/immaculate-grid/",
     "description": "Daily sports trivia grid: name a player matching each row and column criteria.",
     "thumbnail": null,
-    "tags": ["trivia", "daily", "sports"],
+    "tags": [
+      "trivia",
+      "daily",
+      "sports"
+    ],
     "launchMode": "tab"
   },
   {
@@ -130,7 +188,10 @@
     "url": "https://www.geoguessr.com/",
     "description": "Dropped into Street View somewhere in the world — guess where you are on the map.",
     "thumbnail": "https://www.geoguessr.com/_next/static/media/default.e7343242.webp",
-    "tags": ["trivia", "geography"],
+    "tags": [
+      "trivia",
+      "geography"
+    ],
     "launchMode": "tab",
     "verify": true
   },
@@ -139,7 +200,10 @@
     "url": "https://www.nytimes.com/games/wordle/index.html",
     "description": "Guess the five-letter word in six tries with color-coded clues.",
     "thumbnail": "https://www.nytimes.com/games-assets/v2/assets/wordle/wordle_og_1200x630.png",
-    "tags": ["word", "daily"],
+    "tags": [
+      "word",
+      "daily"
+    ],
     "launchMode": "tab"
   },
   {
@@ -147,7 +211,11 @@
     "url": "https://www.nytimes.com/games/connections",
     "description": "Sort 16 words into four hidden groups without making four mistakes.",
     "thumbnail": "https://www.nytimes.com/games-assets/v2/assets/connections/NYT-Connections-og-image.png",
-    "tags": ["word", "daily", "puzzle"],
+    "tags": [
+      "word",
+      "daily",
+      "puzzle"
+    ],
     "launchMode": "tab"
   },
   {
@@ -155,7 +223,11 @@
     "url": "https://www.nytimes.com/crosswords/game/mini",
     "description": "A bite-size daily crossword you can solve in under a minute.",
     "thumbnail": "https://www.nytimes.com/games-assets/v2/assets/icons/crossword-meta-mini.png",
-    "tags": ["word", "daily", "puzzle"],
+    "tags": [
+      "word",
+      "daily",
+      "puzzle"
+    ],
     "launchMode": "tab"
   },
   {
@@ -163,7 +235,10 @@
     "url": "https://play2048.co/",
     "description": "Slide numbered tiles to combine them and reach the 2048 tile.",
     "thumbnail": "https://play2048.co/ogImage.jpg",
-    "tags": ["puzzle", "classic"],
+    "tags": [
+      "puzzle",
+      "classic"
+    ],
     "launchMode": "embed"
   },
   {
@@ -171,7 +246,11 @@
     "url": "https://tetris.com/play-tetris",
     "description": "The classic falling-blocks puzzle.",
     "thumbnail": "https://www.datocms-assets.com/145957/1744284280-tetris-mobile.png?auto=format&fit=max&w=1200",
-    "tags": ["puzzle", "classic", "arcade"],
+    "tags": [
+      "puzzle",
+      "classic",
+      "arcade"
+    ],
     "launchMode": "tab"
   },
   {
@@ -179,7 +258,10 @@
     "url": "https://sudoku.com/",
     "description": "Fill the grid so every row, column, and box contains 1-9.",
     "thumbnail": null,
-    "tags": ["puzzle", "classic"],
+    "tags": [
+      "puzzle",
+      "classic"
+    ],
     "launchMode": "tab"
   },
   {
@@ -187,7 +269,10 @@
     "url": "https://minesweeper.online/",
     "description": "Clear the board without detonating any hidden mines.",
     "thumbnail": "https://minesweeper.online/img/og_image.png",
-    "tags": ["puzzle", "classic"],
+    "tags": [
+      "puzzle",
+      "classic"
+    ],
     "launchMode": "embed",
     "verify": true
   },
@@ -196,7 +281,10 @@
     "url": "https://littlealchemy2.com/",
     "description": "Combine elements to discover new items — over 700 to find.",
     "thumbnail": "https://littlealchemy2.com/static/img/little-alchemy-2-fb-thumbnail.jpg",
-    "tags": ["puzzle", "casual"],
+    "tags": [
+      "puzzle",
+      "casual"
+    ],
     "launchMode": "embed"
   },
   {
@@ -204,7 +292,10 @@
     "url": "https://orteil.dashnet.org/cookieclicker/",
     "description": "Click the cookie, then build an automated baking empire.",
     "thumbnail": null,
-    "tags": ["idle", "clicker"],
+    "tags": [
+      "idle",
+      "clicker"
+    ],
     "launchMode": "embed"
   },
   {
@@ -212,7 +303,10 @@
     "url": "https://hextris.io/",
     "description": "A fast, addictive hexagonal spin on Tetris.",
     "thumbnail": null,
-    "tags": ["puzzle", "arcade"],
+    "tags": [
+      "puzzle",
+      "arcade"
+    ],
     "launchMode": "embed",
     "verify": true
   },
@@ -221,7 +315,11 @@
     "url": "https://www.chess.com/play/online",
     "description": "Play chess online against people worldwide or the computer.",
     "thumbnail": "https://www.chess.com/bundles/web/images/social/share-play-online.49be68ce.png",
-    "tags": ["strategy", "multiplayer", "classic"],
+    "tags": [
+      "strategy",
+      "multiplayer",
+      "classic"
+    ],
     "launchMode": "tab"
   },
   {
@@ -229,7 +327,10 @@
     "url": "https://slither.io/",
     "description": "Grow your snake by eating glowing orbs in a multiplayer arena.",
     "thumbnail": "https://slither.io/s/fbthumb5.jpg",
-    "tags": ["multiplayer", "arcade"],
+    "tags": [
+      "multiplayer",
+      "arcade"
+    ],
     "launchMode": "tab"
   },
   {
@@ -237,7 +338,10 @@
     "url": "https://agar.io/",
     "description": "Eat smaller cells and dodge bigger ones to grow in a shared arena.",
     "thumbnail": "https://agar.io/img/1200x630.png",
-    "tags": ["multiplayer", "arcade"],
+    "tags": [
+      "multiplayer",
+      "arcade"
+    ],
     "launchMode": "tab"
   },
   {
@@ -245,7 +349,497 @@
     "url": "https://krunker.io/",
     "description": "Fast, blocky multiplayer first-person shooter in the browser.",
     "thumbnail": "https://assets.krunker.io/promo/og_1200x630.jpg",
-    "tags": ["shooter", "multiplayer"],
+    "tags": [
+      "shooter",
+      "multiplayer"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Contexto",
+    "url": "https://contexto.me/",
+    "description": "Guess the secret word; each guess is ranked by how semantically close it is.",
+    "thumbnail": null,
+    "tags": [
+      "word",
+      "daily",
+      "puzzle"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Semantle",
+    "url": "https://semantle.com/",
+    "description": "A daily word game won by semantic similarity, not spelling — guesses score by meaning.",
+    "thumbnail": "https://semantle.com/assets/cover.png",
+    "tags": [
+      "word",
+      "daily",
+      "puzzle"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Quordle",
+    "url": "https://www.quordle.com/",
+    "description": "Solve four Wordle grids at once with nine shared guesses.",
+    "thumbnail": "https://www.merriam-webster.com/games/quordle/quordle-banner-1200.png",
+    "tags": [
+      "word",
+      "daily"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Octordle",
+    "url": "https://octordle.com/",
+    "description": "Eight Wordle boards solved simultaneously in thirteen guesses.",
+    "thumbnail": null,
+    "tags": [
+      "word",
+      "daily"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Nerdle",
+    "url": "https://nerdlegame.com/",
+    "description": "Like Wordle, but for math equations — guess the hidden calculation.",
+    "thumbnail": "https://nerdlegame.com/og_image_nerdle.png",
+    "tags": [
+      "math",
+      "daily",
+      "puzzle"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Waffle",
+    "url": "https://wafflegame.net/",
+    "description": "Swap letters on a waffle-shaped grid to form six crossing words in limited moves.",
+    "thumbnail": "https://wafflegame.net/preview-wide.png",
+    "tags": [
+      "word",
+      "daily",
+      "puzzle"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Squaredle",
+    "url": "https://squaredle.app/",
+    "description": "Find all the hidden words in a daily letter grid — a Boggle-style brain teaser.",
+    "thumbnail": "https://squaredle.app/squaredle.png",
+    "tags": [
+      "word",
+      "daily",
+      "puzzle"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Redactle",
+    "url": "https://redactle.net/",
+    "description": "Deduce a redacted Wikipedia article by guessing the hidden words.",
+    "thumbnail": "https://redactle.net/thumbnail-square.png",
+    "tags": [
+      "word",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Weaver",
+    "url": "https://wordwormdormdork.com/",
+    "description": "Change one letter at a time to climb from the start word to the goal word.",
+    "thumbnail": "https://wordwormdormdork.com/images/og/weaver-games-og.png",
+    "tags": [
+      "word",
+      "daily",
+      "puzzle"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Crosswordle",
+    "url": "https://crosswordle.vercel.app/",
+    "description": "A crossword-meets-Wordle deduction puzzle solved in reverse.",
+    "thumbnail": "https://user-images.githubusercontent.com/610102/153318170-ec597246-d702-48ef-abba-17bd26d0ea93.png",
+    "tags": [
+      "word",
+      "daily",
+      "puzzle"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Metazooa",
+    "url": "https://metazooa.com/",
+    "description": "Guess the mystery animal; clues show how closely your guesses are related on the tree of life.",
+    "thumbnail": "https://metazooa.com/Metazooa-open-graph.png",
+    "tags": [
+      "trivia",
+      "daily",
+      "animals"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Metaflora",
+    "url": "https://flora.metazooa.com/",
+    "description": "Like Metazooa, but for plants — guess the species using botanical relationships.",
+    "thumbnail": "https://flora.metazooa.com/Metaflora-open-graph.png",
+    "tags": [
+      "trivia",
+      "daily",
+      "plants"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Actorle",
+    "url": "https://actorle.com/",
+    "description": "Guess the mystery actor from their (redacted) filmography.",
+    "thumbnail": "https://actorle.com/og/og.png",
+    "tags": [
+      "trivia",
+      "daily",
+      "movies"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Cine2nerdle",
+    "url": "https://www.cinenerdle2.app/",
+    "description": "A daily movie-connections game and film trivia battle.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "daily",
+      "movies"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Poeltl",
+    "url": "https://poeltl.dunk.town/",
+    "description": "Guess the mystery NBA player in eight tries with attribute clues.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "daily",
+      "sports"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Globle: Capitals",
+    "url": "https://globle-capitals.com/",
+    "description": "Guess the mystery capital city; proximity is color-coded on the globe.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "daily",
+      "geography"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Guess The Game",
+    "url": "https://guessthe.game/",
+    "description": "Identify the video game from daily screenshots, with more hints each guess.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "daily",
+      "video-games"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Thrice",
+    "url": "https://thrice.geekswhodrink.com/",
+    "description": "A daily trivia game: three categories, three questions, three guesses each.",
+    "thumbnail": "https://thrice.geekswhodrink.com/assets/thrice_share_image_square-dc5676d12e32de95424e234106eb3c4ddb59f5eda746dd0f407dafa39c079748.png",
+    "tags": [
+      "trivia",
+      "daily",
+      "quiz"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Plurality",
+    "url": "https://plurality.fun/",
+    "description": "Guess the most common survey answers — think Family Feud as a daily puzzle.",
+    "thumbnail": "https://trainwrecklabs.com/twl/Open-Graph.png",
+    "tags": [
+      "trivia",
+      "daily",
+      "word"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Sporcle",
+    "url": "https://www.sporcle.com/games/",
+    "description": "The mega-library of user-made quizzes across every topic, plus a daily quiz.",
+    "thumbnail": "https://d31xsmoz1lk3y3.cloudfront.net/images/big/default.png?v=130001",
+    "tags": [
+      "trivia",
+      "quiz"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "1v1.LOL",
+    "url": "https://1v1.lol/",
+    "description": "Build-and-battle Fortnite-style shooter, right in the browser.",
+    "thumbnail": null,
+    "tags": [
+      "multiplayer",
+      "shooter",
+      "io"
+    ],
+    "launchMode": "tab",
+    "verify": true
+  },
+  {
+    "title": "Skribbl.io",
+    "url": "https://skribbl.io/",
+    "description": "Draw and guess words with friends in this classic multiplayer party game.",
+    "thumbnail": "https://skribbl.io/img/thumbnail.png",
+    "tags": [
+      "multiplayer",
+      "drawing",
+      "party"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Gartic Phone",
+    "url": "https://garticphone.com/",
+    "description": "Telephone meets Pictionary — hilarious drawing chains with friends.",
+    "thumbnail": null,
+    "tags": [
+      "multiplayer",
+      "drawing",
+      "party"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Diep.io",
+    "url": "https://diep.io/",
+    "description": "Upgrade your tank and blast shapes and players in a top-down arena.",
+    "thumbnail": null,
+    "tags": [
+      "multiplayer",
+      "arcade",
+      "io"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Bonk.io",
+    "url": "https://bonk.io/",
+    "description": "A physics multiplayer party game — knock everyone else off the platform.",
+    "thumbnail": null,
+    "tags": [
+      "multiplayer",
+      "arcade",
+      "io"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Shell Shockers",
+    "url": "https://shellshock.io/",
+    "description": "Multiplayer FPS where you play as egg soldiers armed to the yolk.",
+    "thumbnail": "https://www.shellshock.io/img/previewImage_shellShockers.webp",
+    "tags": [
+      "multiplayer",
+      "shooter",
+      "io"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "ZombsRoyale.io",
+    "url": "https://zombsroyale.io/",
+    "description": "A 2D battle royale with up to 100 players per match.",
+    "thumbnail": null,
+    "tags": [
+      "multiplayer",
+      "shooter",
+      "io"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Smash Karts",
+    "url": "https://smashkarts.io/",
+    "description": "3D kart combat — grab weapons and blast rivals in short multiplayer rounds.",
+    "thumbnail": null,
+    "tags": [
+      "multiplayer",
+      "racing",
+      "io"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "MooMoo.io",
+    "url": "https://moomoo.io/",
+    "description": "Gather resources, build a base, and survive against other players.",
+    "thumbnail": "https://moomoo.io/img/og-image.jpg",
+    "tags": [
+      "multiplayer",
+      "survival",
+      "io"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Taming.io",
+    "url": "https://taming.io/",
+    "description": "Tame animals, build, and fight to survive in a multiplayer arena.",
+    "thumbnail": "https://taming.io/img/banner.png?5",
+    "tags": [
+      "multiplayer",
+      "survival",
+      "io"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Tanki Online",
+    "url": "https://tankionline.com/",
+    "description": "A 3D multiplayer tank shooter playable in the browser.",
+    "thumbnail": null,
+    "tags": [
+      "multiplayer",
+      "shooter"
+    ],
+    "launchMode": "tab",
+    "verify": true
+  },
+  {
+    "title": "Monkeytype",
+    "url": "https://monkeytype.com/",
+    "description": "A clean, customizable typing test to measure and improve your speed.",
+    "thumbnail": "https://monkeytype.com/images/mtsocial.png",
+    "tags": [
+      "typing",
+      "skill"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "TypeRacer",
+    "url": "https://play.typeracer.com/",
+    "description": "Race others in real time by typing passages as fast as you can.",
+    "thumbnail": null,
+    "tags": [
+      "typing",
+      "multiplayer",
+      "skill"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Lichess",
+    "url": "https://lichess.org/",
+    "description": "Free, open-source chess — play, learn, and solve puzzles with no account needed.",
+    "thumbnail": null,
+    "tags": [
+      "strategy",
+      "multiplayer",
+      "classic"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Flappy Bird",
+    "url": "https://flappybird.io/",
+    "description": "The infamously hard one-tap arcade classic.",
+    "thumbnail": "https://flappybird.io/og-image.png",
+    "tags": [
+      "arcade",
+      "classic",
+      "skill"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Line Rider",
+    "url": "https://www.linerider.com/",
+    "description": "Draw a track and watch a sledder ride your creation — a sandbox classic.",
+    "thumbnail": "https://www.linerider.com/_v2153.0/social.png",
+    "tags": [
+      "sandbox",
+      "physics",
+      "creative"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Universal Paperclips",
+    "url": "https://www.decisionproblem.com/paperclips/",
+    "description": "A deceptively deep idle game about an AI that makes paperclips.",
+    "thumbnail": null,
+    "tags": [
+      "idle",
+      "clicker"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "A Dark Room",
+    "url": "https://adarkroom.doublespeakgames.com/",
+    "description": "A minimalist text adventure that quietly becomes something much bigger.",
+    "thumbnail": null,
+    "tags": [
+      "idle",
+      "text",
+      "adventure"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Candy Box 2",
+    "url": "https://candybox2.github.io/",
+    "description": "An ASCII idle/adventure game that unfolds in surprising ways.",
+    "thumbnail": null,
+    "tags": [
+      "idle",
+      "adventure"
+    ],
+    "launchMode": "tab"
+  },
+  {
+    "title": "Melvor Idle",
+    "url": "https://melvoridle.com/",
+    "description": "An idle RPG inspired by old-school RuneScape skilling.",
+    "thumbnail": null,
+    "tags": [
+      "idle",
+      "rpg"
+    ],
+    "launchMode": "tab",
+    "verify": true
+  },
+  {
+    "title": "Nonogram",
+    "url": "https://www.nonograms.org/",
+    "description": "Solve picture logic puzzles using the number clues on each row and column.",
+    "thumbnail": null,
+    "tags": [
+      "puzzle",
+      "logic",
+      "classic"
+    ],
     "launchMode": "tab"
   }
 ]
