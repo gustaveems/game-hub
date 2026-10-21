@@ -61,71 +61,87 @@ function getAllTags() {
 function render() {
   renderFilterBar();
   const filtered = getFilteredGames();
-  const grid = $('#game-grid');
+  const list = $('#game-list');
   const empty = $('#empty-state');
 
   if (games.length === 0) {
-    grid.classList.add('hidden');
+    list.classList.add('hidden');
     empty.classList.remove('hidden');
     return;
   }
 
   empty.classList.add('hidden');
-  grid.classList.remove('hidden');
+  list.classList.remove('hidden');
 
   if (filtered.length === 0) {
-    grid.innerHTML = '<p class="no-match">No games match your search or filter.</p>';
+    list.innerHTML = '<p class="no-match">No games match your search or filter.</p>';
     return;
   }
 
-  grid.innerHTML = filtered.map(cardHTML).join('');
+  list.innerHTML = filtered.map(rowHTML).join('');
 
-  grid.querySelectorAll('.game-card').forEach(card => {
-    const id = card.dataset.id;
-    card.addEventListener('click', (e) => {
-      if (e.target.closest('.card-menu-btn') || e.target.closest('.card-dropdown')) return;
+  list.querySelectorAll('.game-row').forEach(row => {
+    const id = row.dataset.id;
+    row.addEventListener('click', (e) => {
+      if (e.target.closest('.row-menu-btn') || e.target.closest('.card-dropdown')) return;
       launchGame(id);
     });
   });
 
-  grid.querySelectorAll('.card-menu-btn').forEach(btn => {
+  list.querySelectorAll('.row-menu-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
       toggleMenu(btn.dataset.id);
     });
   });
+
+  // If a game's artwork fails to load, swap in the favicon/initials tile.
+  list.querySelectorAll('img.cover[data-id]').forEach(img => {
+    img.addEventListener('error', () => {
+      const g = games.find(x => x.id === img.dataset.id);
+      const thumb = img.closest('.row-thumb');
+      if (g && thumb) thumb.innerHTML = logoTileHTML(g);
+    });
+  });
 }
 
+// Favicon tile with initials fallback, used when a game has no artwork thumbnail.
 function logoTileHTML(g) {
-  // Branded-color tile with the site's favicon logo, used when there is no
-  // explicit thumbnail. Falls back to the title's initials if the logo 404s.
   const color = hashColor(g.title);
   const fav = g.source === 'local' ? null : faviconUrl(g.url, 128);
-  const initialsHtml = `<span class="logo-initials">${escHtml(initials(g.title))}</span>`;
-  const logoImg = fav
-    ? `<img class="logo-img" src="${escHtml(fav)}" alt="" loading="lazy" onerror="this.classList.add('hidden');this.nextElementSibling.classList.remove('hidden')"><span class="logo-initials hidden">${escHtml(initials(g.title))}</span>`
-    : initialsHtml;
-  return `<div class="card-thumb logo-tile" style="--tile:${color}">${logoImg}</div>`;
+  const ini = escHtml(initials(g.title));
+  const inner = fav
+    ? `<img class="logo-img" src="${escHtml(fav)}" alt="" loading="lazy" onerror="this.classList.add('hidden');this.nextElementSibling.classList.remove('hidden')"><span class="logo-initials hidden">${ini}</span>`
+    : `<span class="logo-initials">${ini}</span>`;
+  return `<div class="logo-tile" style="--tile:${color}">${inner}</div>`;
 }
 
-function cardHTML(g) {
-  const thumb = g.thumbnail
-    ? `<div class="card-thumb"><img src="${escHtml(g.thumbnail)}" alt="" loading="lazy"></div>`
-    : logoTileHTML(g);
+function thumbHTML(g) {
+  // Artwork thumbnail if present (fallback wired in render()); else favicon tile.
+  if (g.thumbnail) {
+    return `<img class="cover" data-id="${g.id}" src="${escHtml(g.thumbnail)}" alt="" loading="lazy">`;
+  }
+  return logoTileHTML(g);
+}
 
+function rowHTML(g) {
   const favStar = g.favorite ? '<span class="fav-star">★</span>' : '';
-  const tagsHtml = g.tags.map(t => `<span class="card-tag">${escHtml(t)}</span>`).join('');
+  const tagsHtml = g.tags.slice(0, 4).map(t => `<span class="row-tag">${escHtml(t)}</span>`).join('');
   const badge = g.source === 'local' ? 'local' : g.launchMode;
   const menuOpen = openMenuId === g.id;
 
   return `
-    <div class="game-card" data-id="${g.id}">
-      ${thumb}
-      <div class="card-body">
-        <div class="card-title">${favStar}<span class="card-title-text">${escHtml(g.title)}</span><span class="launch-badge">${badge}</span></div>
-        <div class="card-tags">${tagsHtml}</div>
+    <div class="game-row" data-id="${g.id}">
+      <div class="row-thumb">${thumbHTML(g)}</div>
+      <div class="row-body">
+        <div class="row-title">${favStar}<span class="row-title-text">${escHtml(g.title)}</span></div>
+        <div class="row-desc">${escHtml(g.description || '')}</div>
+        <div class="row-tags">${tagsHtml}</div>
       </div>
-      <button class="card-menu-btn" data-id="${g.id}" title="Menu" aria-label="Game menu">⋮</button>
+      <div class="row-right">
+        <span class="launch-badge">${badge}</span>
+        <button class="row-menu-btn" data-id="${g.id}" title="Menu" aria-label="Game menu">⋮</button>
+      </div>
       ${menuOpen ? dropdownHTML(g) : ''}
     </div>`;
 }

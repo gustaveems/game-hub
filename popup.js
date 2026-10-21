@@ -22,19 +22,36 @@ function renderFavorites() {
   }
 
   grid.innerHTML = favs.map(g => {
-    const fav = g.source === 'local' ? null : faviconUrl(g.url, 64);
-    const logo = fav
-      ? `<img class="fav-logo" src="${esc(fav)}" alt="" onerror="this.outerHTML='<div class=\\'fav-logo-fallback\\' style=\\'background:${hashColor(g.title)}\\'>${esc(initials(g.title))}</div>'">`
-      : `<div class="fav-logo-fallback" style="background:${hashColor(g.title)}">${esc(initials(g.title))}</div>`;
-    return `<div class="fav-tile" data-id="${g.id}" title="${esc(g.title)}">
-      ${logo}
+    const thumb = g.thumbnail
+      ? `<img class="cover" data-id="${g.id}" src="${esc(g.thumbnail)}" alt="">`
+      : logoMarkup(g);
+    return `<div class="fav-row" data-id="${g.id}" title="${esc(g.title)}">
+      <div class="fav-thumb">${thumb}</div>
       <span class="fav-name">${esc(g.title)}</span>
+      <span class="fav-go">▶</span>
     </div>`;
   }).join('');
 
-  grid.querySelectorAll('.fav-tile').forEach(tile => {
-    tile.addEventListener('click', () => launchFavorite(tile.dataset.id));
+  // Swap failed artwork for the favicon/initials logo.
+  grid.querySelectorAll('img.cover[data-id]').forEach(img => {
+    img.addEventListener('error', () => {
+      const g = games.find(x => x.id === img.dataset.id);
+      const box = img.closest('.fav-thumb');
+      if (g && box) box.innerHTML = logoMarkup(g);
+    });
   });
+
+  grid.querySelectorAll('.fav-row').forEach(row => {
+    row.addEventListener('click', () => launchFavorite(row.dataset.id));
+  });
+}
+
+function logoMarkup(g) {
+  const fav = g.source === 'local' ? null : faviconUrl(g.url, 64);
+  if (fav) {
+    return `<img class="fav-logo" src="${esc(fav)}" alt="" onerror="this.outerHTML='<div class=\\'fav-logo-fallback\\' style=\\'background:${hashColor(g.title)}\\'>${esc(initials(g.title))}</div>'">`;
+  }
+  return `<div class="fav-logo-fallback" style="background:${hashColor(g.title)}">${esc(initials(g.title))}</div>`;
 }
 
 async function launchFavorite(id) {

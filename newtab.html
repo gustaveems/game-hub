@@ -7,31 +7,33 @@
   <link rel="stylesheet" href="newtab.css">
 </head>
 <body>
-  <div class="header">
-    <h1>🎮 Game Hub</h1>
-    <div class="search-box">
-      <input type="text" id="search" placeholder='Search games… (press "/" to focus)' autocomplete="off">
+  <div class="wrap">
+    <div class="header">
+      <h1>🎮 Game Hub</h1>
+      <div class="search-box">
+        <input type="text" id="search" placeholder='Search games… (press "/" to focus)' autocomplete="off">
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-primary" id="btn-add">+ Add Game</button>
+      </div>
     </div>
-    <div class="header-actions">
-      <button class="btn btn-primary" id="btn-add">+ Add Game</button>
+
+    <div class="filter-bar" id="filter-bar">
+      <select class="sort-select" id="sort-select">
+        <option value="title">Sort: Title</option>
+        <option value="added">Sort: Recently Added</option>
+        <option value="played">Sort: Most Played</option>
+      </select>
     </div>
-  </div>
 
-  <div class="filter-bar" id="filter-bar">
-    <select class="sort-select" id="sort-select">
-      <option value="title">Sort: Title</option>
-      <option value="added">Sort: Recently Added</option>
-      <option value="played">Sort: Most Played</option>
-    </select>
-  </div>
-
-  <div class="game-grid" id="game-grid"></div>
-  <div class="empty-state hidden" id="empty-state">
-    <h2>No games yet</h2>
-    <p>Add your first game to get started.</p>
-    <button class="btn btn-primary" id="btn-add-empty">+ Add Game</button>
-    <br>
-    <button class="restore-link" id="btn-restore-empty">Restore starter games</button>
+    <div class="game-list" id="game-list"></div>
+    <div class="empty-state hidden" id="empty-state">
+      <h2>No games yet</h2>
+      <p>Add your first game to get started.</p>
+      <button class="btn btn-primary" id="btn-add-empty">+ Add Game</button>
+      <br>
+      <button class="restore-link" id="btn-restore-empty">Restore starter games</button>
+    </div>
   </div>
 
   <!-- Add/Edit modal -->
