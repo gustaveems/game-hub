@@ -2,6 +2,8 @@
 
 A Chrome extension that gives you a personal library of browser games. Click the toolbar icon for a quick-launch popup of your favorites, and open the full library in its own tab. Comes with ~70 curated games (trivia/daily-puzzle heavy) and lets you add your own by URL or by uploading an HTML file. It does **not** take over your new-tab page.
 
+> **Related:** [Link Collector](https://github.com/gustaveems/link-collector) — a companion extension that grabs the links from all your open tabs as one block of text.
+
 ## Loading the Extension
 
 1. Open Chrome and go to `chrome://extensions`
