@@ -14,6 +14,7 @@
         <input type="text" id="search" placeholder='Search games… (press "/" to focus)' autocomplete="off">
       </div>
       <div class="header-actions">
+        <button class="btn btn-ghost" id="btn-leaderboard">🏆 Leaderboard</button>
         <button class="btn btn-primary" id="btn-add">+ Add Game</button>
       </div>
     </div>
@@ -87,6 +88,45 @@
       <div class="form-actions">
         <button class="btn btn-ghost" id="btn-cancel-add">Cancel</button>
         <button class="btn btn-primary" id="btn-save-add">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Leaderboard modal -->
+  <div class="modal-overlay hidden" id="modal-leaderboard">
+    <div class="modal-content">
+      <h2>🏆 Daily Streak Leaderboard</h2>
+      <p class="lb-sub">Compete on your daily-play streak — consecutive days you launch at least one daily game. Share your code with friends and paste theirs in to rank against each other.</p>
+
+      <div class="lb-you">
+        <div class="form-group">
+          <label for="lb-name">Your name</label>
+          <input type="text" id="lb-name" placeholder="Pick a name" maxlength="40">
+        </div>
+        <div class="lb-mystats" id="lb-mystats"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="lb-code">Your share code</label>
+        <div class="lb-code-row">
+          <input type="text" id="lb-code" readonly>
+          <button class="btn btn-ghost btn-small" id="lb-copy">Copy</button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="lb-add">Add a friend's code</label>
+        <div class="lb-code-row">
+          <input type="text" id="lb-add" placeholder="Paste a GH1-… code">
+          <button class="btn btn-primary btn-small" id="lb-add-btn">Add</button>
+        </div>
+        <div class="form-error hidden" id="lb-add-error"></div>
+      </div>
+
+      <div class="lb-board" id="lb-board"></div>
+
+      <div class="form-actions">
+        <button class="btn btn-ghost" id="lb-close">Close</button>
       </div>
     </div>
   </div>

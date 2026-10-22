@@ -1,11 +1,14 @@
 import {
   getGames, addGame, updateGame, deleteGame, recordPlay,
   resetToStarter, normalizeUrl, saveLocalGameBody, getLocalGameBody,
-  getThumbCache, setThumbCache, pruneThumbCache
+  getThumbCache, setThumbCache, pruneThumbCache,
+  getStats, recordDailyPlay, getProfile, setProfileName,
+  getFriends, upsertFriend, removeFriend
 } from './lib/storage.js';
 import { fetchMetadata } from './lib/metadata.js';
 import { checkEmbeddable } from './lib/embed.js';
 import { faviconUrl, hashColor, initials } from './lib/logo.js';
+import { effectiveStreak, encodeShare, decodeShare, rankBoard } from './lib/leaderboard.js';
 
 let games = [];
 let thumbCache = {}; // { [gameId]: { src, data } } — artwork cached as data URLs
@@ -330,6 +333,7 @@ async function launchGame(id) {
     chrome.tabs.create({ url: g.url });
   }
   games = await recordPlay(id);
+  if (g.tags.includes('daily')) await recordDailyPlay();
   render();
 }
 
@@ -588,6 +592,7 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     if (!$('#embed-overlay').classList.contains('hidden')) return closeEmbed();
     if (!$('#modal-add').classList.contains('hidden')) return closeAddModal();
+    if (!$('#modal-leaderboard').classList.contains('hidden')) return closeLeaderboard();
   }
   if (e.target.matches('input, textarea, select')) return;
   if (e.key === '/') { e.preventDefault(); $('#search').focus(); }
@@ -617,6 +622,130 @@ $('#embed-fallback-open').addEventListener('click', () => {
   if (url && !url.startsWith('local://')) chrome.tabs.create({ url });
   closeEmbed();
 });
+
+// --- Leaderboard ---
+let lbStats = null;
+let lbFriends = [];
+
+function dailiesToday() {
+  return games.filter(g => g.tags.includes('daily') && isPlayedToday(g)).length;
+}
+function totalPlays() {
+  return games.reduce((n, g) => n + (g.playCount || 0), 0);
+}
+
+function myEntry() {
+  const name = ($('#lb-name').value || '').trim() || 'You';
+  return {
+    name,
+    streak: effectiveStreak(lbStats),
+    longest: lbStats?.longestStreak || 0,
+    dailiesToday: dailiesToday(),
+    plays: totalPlays()
+  };
+}
+
+async function openLeaderboard() {
+  lbStats = await getStats();
+  lbFriends = await getFriends();
+  const profile = await getProfile();
+  $('#lb-name').value = profile.name || '';
+  $('#lb-add-error').classList.add('hidden');
+  renderMyStats();
+  updateShareCode();
+  renderBoard();
+  $('#modal-leaderboard').classList.remove('hidden');
+}
+
+function closeLeaderboard() {
+  $('#modal-leaderboard').classList.add('hidden');
+}
+
+function renderMyStats() {
+  const streak = effectiveStreak(lbStats);
+  $('#lb-mystats').innerHTML = `
+    <div class="lb-stat"><span class="num"><span class="flame">🔥</span> ${streak}</span><span class="lbl">Current streak</span></div>
+    <div class="lb-stat"><span class="num">${lbStats?.longestStreak || 0}</span><span class="lbl">Longest</span></div>
+    <div class="lb-stat"><span class="num">${dailiesToday()}</span><span class="lbl">Dailies today</span></div>
+    <div class="lb-stat"><span class="num">${totalPlays()}</span><span class="lbl">Total plays</span></div>`;
+}
+
+function updateShareCode() {
+  $('#lb-code').value = encodeShare({ v: 1, ...myEntry(), ts: Date.now() });
+}
+
+function renderBoard() {
+  const rows = rankBoard(myEntry(), lbFriends);
+  const medals = ['🥇', '🥈', '🥉'];
+  const board = $('#lb-board');
+
+  if (rows.length === 1) {
+    board.innerHTML = '<div class="lb-empty">Add a friend\'s code to start competing.</div>';
+    return;
+  }
+
+  board.innerHTML = rows.map((r, i) => {
+    const rank = medals[i] ? `<span class="lb-rank medal">${medals[i]}</span>` : `<span class="lb-rank">${i + 1}</span>`;
+    const you = r.isYou ? '<span class="you-tag">YOU</span>' : '';
+    const remove = r.isYou ? '' : `<button class="lb-remove" data-name="${escHtml(r.name)}" title="Remove">✕</button>`;
+    return `<div class="lb-row${r.isYou ? ' you' : ''}">
+      ${rank}
+      <span class="lb-who">${escHtml(r.name)}${you}</span>
+      <span class="lb-streak"><span class="flame">🔥</span> ${r.streak}</span>
+      ${remove}
+    </div>`;
+  }).join('');
+
+  board.querySelectorAll('.lb-remove').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      lbFriends = await removeFriend(btn.dataset.name);
+      renderBoard();
+    });
+  });
+}
+
+async function addFriendCode() {
+  const code = $('#lb-add').value;
+  const parsed = decodeShare(code);
+  const err = $('#lb-add-error');
+  if (!parsed) {
+    err.textContent = 'That doesn\'t look like a valid share code.';
+    err.classList.remove('hidden');
+    return;
+  }
+  const mine = ($('#lb-name').value || '').trim().toLowerCase();
+  if (parsed.name.toLowerCase() === mine) {
+    err.textContent = 'That code uses your own name — ask a friend for theirs.';
+    err.classList.remove('hidden');
+    return;
+  }
+  err.classList.add('hidden');
+  lbFriends = await upsertFriend({ ...parsed, updatedAt: Date.now() });
+  $('#lb-add').value = '';
+  renderBoard();
+}
+
+$('#btn-leaderboard').addEventListener('click', openLeaderboard);
+$('#lb-close').addEventListener('click', closeLeaderboard);
+$('#modal-leaderboard').addEventListener('click', (e) => { if (e.target === $('#modal-leaderboard')) closeLeaderboard(); });
+$('#lb-name').addEventListener('input', async () => {
+  await setProfileName($('#lb-name').value.trim());
+  renderMyStats();
+  updateShareCode();
+  renderBoard();
+});
+$('#lb-copy').addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText($('#lb-code').value);
+    $('#lb-copy').textContent = 'Copied!';
+    setTimeout(() => { $('#lb-copy').textContent = 'Copy'; }, 1500);
+  } catch {
+    $('#lb-code').select();
+    document.execCommand('copy');
+  }
+});
+$('#lb-add-btn').addEventListener('click', addFriendCode);
+$('#lb-add').addEventListener('keydown', (e) => { if (e.key === 'Enter') addFriendCode(); });
 
 function escHtml(str) {
   const d = document.createElement('div');

@@ -38,6 +38,17 @@ Artwork is **cached the first time you see it**: the image is fetched once, conv
 - **Embed** — opens the game in a full-screen overlay iframe. If the site blocks embedding (X-Frame-Options / CSP `frame-ancestors`), a fallback message offers to open it in a new tab.
 - **Uploaded games** always use embed mode — the stored HTML plays from a blob URL in the overlay.
 
+## Leaderboard (Daily Streak)
+
+Click **🏆 Leaderboard** in the library to compete with friends on your **daily-play streak** — the number of consecutive days you launch at least one daily-tagged game. The streak resets if you miss a day. (The extension can only detect that you *opened* a daily game, not that you solved it — third-party game sites don't expose your score — so the streak measures showing up, not winning.)
+
+**Friends (works now, no server):**
+- Pick a name; the modal generates a `GH1-…` **share code** of your stats.
+- Copy it to friends; paste theirs into "Add a friend's code."
+- Everyone is ranked by current streak, with 🥇🥈🥉 for the top three and your row highlighted. It's a local, point-in-time snapshot — re-share codes to update.
+
+**Global leaderboard:** planned as a second phase. It requires a hosted backend (server + database) and isn't built yet.
+
 ## Keyboard Shortcuts (library)
 
 | Key | Action |
