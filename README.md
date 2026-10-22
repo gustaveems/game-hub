@@ -47,7 +47,11 @@ Click **🏆 Leaderboard** in the library to compete with friends on your **dail
 - Copy it to friends; paste theirs into "Add a friend's code."
 - Everyone is ranked by current streak, with 🥇🥈🥉 for the top three and your row highlighted. It's a local, point-in-time snapshot — re-share codes to update.
 
-**Global leaderboard:** planned as a second phase. It requires a hosted backend (server + database) and isn't built yet.
+**Global (live):** the **🌍 Global** tab ranks everyone who uses the extension, worldwide. Set a name and your streak is published automatically; the board shows the top 100 by streak with your row highlighted. Hit **↻ Refresh** to re-sync.
+
+- **Backend:** a Neon Postgres database exposed through the Neon Data API (PostgREST). The extension gets a short-lived anonymous JWT from Neon Auth and reads/writes a single `leaderboard` table. Your row is keyed by a random local id, so you update your own entry rather than creating duplicates.
+- **Security, honestly:** the board is **login-free, so it's self-reported** — anyone who inspects the (public) endpoint could submit a fake streak. Guardrails cap values to sane ranges, force server-side timestamps, and block deletes, but this is a fun board, not an audited ranking. For a tamper-resistant version you'd add real per-user auth.
+- **Config:** the Data API and Auth URLs live in [`lib/global.js`](lib/global.js). To point at your own Neon project, provision a Data API + Neon Auth, create the `leaderboard` table (see `db/schema.sql`), and swap the two URLs.
 
 ## Keyboard Shortcuts (library)
 

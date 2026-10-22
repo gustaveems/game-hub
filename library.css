@@ -549,6 +549,19 @@ body {
 .lb-stat .lbl { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); }
 .lb-stat .num .flame { color: #ff8a3d; }
 
+.lb-tabs { display: flex; gap: 6px; margin-bottom: 14px; border-bottom: 1px solid var(--border-soft); }
+.lb-tab {
+  padding: 8px 14px; border: none; background: none; cursor: pointer;
+  font-family: var(--font); font-size: 0.86rem; font-weight: 600; color: var(--text-muted);
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+}
+.lb-tab:hover { color: var(--text); }
+.lb-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+.lb-note { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px; line-height: 1.45; }
+.lb-global-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.lb-global-status { font-size: 0.8rem; color: var(--text-muted); }
+
 .lb-code-row { display: flex; gap: 8px; }
 .lb-code-row input { flex: 1; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.8rem; }
 

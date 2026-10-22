@@ -9,6 +9,7 @@ import { fetchMetadata } from './lib/metadata.js';
 import { checkEmbeddable } from './lib/embed.js';
 import { faviconUrl, hashColor, initials } from './lib/logo.js';
 import { effectiveStreak, encodeShare, decodeShare, rankBoard } from './lib/leaderboard.js';
+import { submitScore, fetchTop } from './lib/global.js';
 
 let games = [];
 let thumbCache = {}; // { [gameId]: { src, data } } — artwork cached as data URLs
@@ -626,6 +627,8 @@ $('#embed-fallback-open').addEventListener('click', () => {
 // --- Leaderboard ---
 let lbStats = null;
 let lbFriends = [];
+let lbProfile = { name: '', id: null };
+let lbTab = 'friends';
 
 function dailiesToday() {
   return games.filter(g => g.tags.includes('daily') && isPlayedToday(g)).length;
@@ -648,13 +651,55 @@ function myEntry() {
 async function openLeaderboard() {
   lbStats = await getStats();
   lbFriends = await getFriends();
-  const profile = await getProfile();
-  $('#lb-name').value = profile.name || '';
+  lbProfile = await getProfile();
+  $('#lb-name').value = lbProfile.name || '';
   $('#lb-add-error').classList.add('hidden');
   renderMyStats();
   updateShareCode();
   renderBoard();
+  switchLbTab(lbTab);
   $('#modal-leaderboard').classList.remove('hidden');
+}
+
+function switchLbTab(tab) {
+  lbTab = tab;
+  document.querySelectorAll('.lb-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+  $('#lb-pane-friends').classList.toggle('hidden', tab !== 'friends');
+  $('#lb-pane-global').classList.toggle('hidden', tab !== 'global');
+  if (tab === 'global') loadGlobal();
+}
+
+async function loadGlobal() {
+  const status = $('#lb-global-status');
+  const board = $('#lb-global-board');
+  const me = myEntry();
+
+  if (!me.name || me.name === 'You') {
+    board.innerHTML = '<div class="lb-empty">Set a name above to join the global board.</div>';
+    status.textContent = '';
+    return;
+  }
+
+  status.textContent = 'Syncing…';
+  try {
+    await submitScore({ ...me, playerId: lbProfile.id });
+    const rows = await fetchTop(100);
+    const medals = ['🥇', '🥈', '🥉'];
+    status.textContent = `${rows.length} player${rows.length === 1 ? '' : 's'}`;
+    board.innerHTML = rows.map((r, i) => {
+      const isYou = r.player_id === lbProfile.id;
+      const rank = medals[i] ? `<span class="lb-rank medal">${medals[i]}</span>` : `<span class="lb-rank">${i + 1}</span>`;
+      const you = isYou ? '<span class="you-tag">YOU</span>' : '';
+      return `<div class="lb-row${isYou ? ' you' : ''}">
+        ${rank}
+        <span class="lb-who">${escHtml(r.name)}${you}</span>
+        <span class="lb-streak"><span class="flame">🔥</span> ${r.streak}</span>
+      </div>`;
+    }).join('');
+  } catch (e) {
+    status.textContent = '';
+    board.innerHTML = `<div class="lb-empty">Couldn't reach the global board. Check your connection and try Refresh.</div>`;
+  }
 }
 
 function closeLeaderboard() {
@@ -728,11 +773,23 @@ async function addFriendCode() {
 $('#btn-leaderboard').addEventListener('click', openLeaderboard);
 $('#lb-close').addEventListener('click', closeLeaderboard);
 $('#modal-leaderboard').addEventListener('click', (e) => { if (e.target === $('#modal-leaderboard')) closeLeaderboard(); });
+document.querySelectorAll('.lb-tab').forEach(t => {
+  t.addEventListener('click', () => switchLbTab(t.dataset.tab));
+});
+$('#lb-global-refresh').addEventListener('click', loadGlobal);
+
+let nameDebounce = null;
 $('#lb-name').addEventListener('input', async () => {
   await setProfileName($('#lb-name').value.trim());
+  lbProfile.name = $('#lb-name').value.trim();
   renderMyStats();
   updateShareCode();
   renderBoard();
+  // Debounced global re-sync so we don't POST on every keystroke.
+  if (lbTab === 'global') {
+    clearTimeout(nameDebounce);
+    nameDebounce = setTimeout(loadGlobal, 800);
+  }
 });
 $('#lb-copy').addEventListener('click', async () => {
   try {
