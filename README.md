@@ -1,13 +1,13 @@
 # Game Hub
 
-A Chrome extension that turns your new-tab page into a personal library of browser games, with a quick-launch popup for your favorites. Comes with ~30 curated games (trivia/daily-puzzle heavy) and lets you add your own by URL or by uploading an HTML file.
+A Chrome extension that gives you a personal library of browser games. Click the toolbar icon for a quick-launch popup of your favorites, and open the full library in its own tab. Comes with ~70 curated games (trivia/daily-puzzle heavy) and lets you add your own by URL or by uploading an HTML file. It does **not** take over your new-tab page.
 
 ## Loading the Extension
 
 1. Open Chrome and go to `chrome://extensions`
 2. Enable **Developer mode** (top-right toggle)
 3. Click **Load unpacked** and select this folder
-4. Open a new tab — the Game Hub library appears
+4. Click the Game Hub icon in the toolbar — the popup opens; hit **Open Full Library →** to see everything
 
 ## The Popup (toolbar icon)
 
@@ -15,9 +15,9 @@ Click the Game Hub icon in the toolbar to get a compact panel with:
 
 - **Favorites** — up to 5 tiles with each game's logo. Clicking one launches it (URL games open in a tab; embedded/uploaded games open in the full library overlay). The list is filled by: starred favorites first, then most-played, then most-recently-added.
 - **Quick add** — paste a URL and hit **Add**, grab the **Current tab**, or **Upload** a local `.html` game.
-- **Open Full Library →** — opens the new-tab page with the whole collection.
+- **Open Full Library →** — opens the full library in its own tab.
 
-## The Full Library (new-tab page)
+## The Full Library (its own tab)
 
 - **Grid of game cards** — each shows the site's favicon as a logo on a branded-color tile (or an `og:image` thumbnail if one was fetched/set), with title, tags, and a favorite star.
 - **Search** — filters by title and tag as you type.
@@ -30,7 +30,7 @@ Click the Game Hub icon in the toolbar to get a compact panel with:
 
 Each game shows its `og:image` artwork when available, otherwise the site's favicon (via Google's favicon image service — an image URL, not a script, so no remote code runs), and finally a colored tile with the title's initials.
 
-Artwork is **cached the first time you see it**: the image is fetched once, converted to a data URL, and stored in `chrome.storage.local` keyed by game id. After that the new-tab page renders instantly from the cache and keeps working even if a site changes or removes its image (link rot). The cache self-prunes when you delete games, refreshes automatically if you change a game's thumbnail URL, and can be cleared from the Options page.
+Artwork is **cached the first time you see it**: the image is fetched once, converted to a data URL, and stored in `chrome.storage.local` keyed by game id. After that the library renders instantly from the cache and keeps working even if a site changes or removes its image (link rot). The cache self-prunes when you delete games, refreshes automatically if you change a game's thumbnail URL, and can be cleared from the Options page.
 
 ## Launch Modes
 
@@ -81,8 +81,8 @@ Stored under key `games` with `schemaVersion: 2`. Uploaded game bodies are store
 ## Test Checklist (~10 minutes)
 
 1. Load at `chrome://extensions` — no errors or warnings
-2. Open a new tab — ~30 starter games appear, each with a favicon logo tile
-3. Click the toolbar icon — the popup shows favorites (initially most-recent), quick-add, and "Open Full Library"
+2. Click the toolbar icon — the popup shows favorites (initially most-recent), quick-add, and "Open Full Library"; your new-tab page is untouched
+3. Click **Open Full Library →** — the library opens in a tab with ~70 games, grouped into sections with a "Today's Dailies" strip on top
 4. In the popup, click a favorite tile — the game launches and the popup closes
 5. In the popup, paste a URL (e.g. `https://sudoku.com`) and click Add — it appears; the count increments
 6. In the popup, click **+ Current tab** on any page — it's added

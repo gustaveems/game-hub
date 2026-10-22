@@ -2,10 +2,7 @@
   "manifest_version": 3,
   "name": "Game Hub",
   "version": "1.0.0",
-  "description": "A personal library of browser games you can launch from your new-tab page.",
-  "chrome_url_overrides": {
-    "newtab": "newtab.html"
-  },
+  "description": "A personal library of browser games — favorites in the popup, full library in its own tab.",
   "action": {
     "default_popup": "popup.html",
     "default_icon": {

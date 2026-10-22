@@ -67,7 +67,7 @@ async function launchFavorite(id) {
   if (!g) return;
   // Local/embed games are launched inside the full library overlay; URL games open directly.
   if (g.source === 'local' || g.launchMode === 'embed') {
-    chrome.tabs.create({ url: chrome.runtime.getURL('newtab.html') });
+    chrome.tabs.create({ url: chrome.runtime.getURL('library.html') });
   } else {
     chrome.tabs.create({ url: g.url });
   }
@@ -152,7 +152,7 @@ $('#file-upload').addEventListener('change', async (e) => {
 });
 
 $('#btn-open-library').addEventListener('click', () => {
-  chrome.tabs.create({ url: chrome.runtime.getURL('newtab.html') });
+  chrome.tabs.create({ url: chrome.runtime.getURL('library.html') });
   window.close();
 });
 
