@@ -4,36 +4,38 @@
   <meta charset="UTF-8">
   <style>
     :root {
-      --bg: #1a1a2e;
-      --bg-card: #16213e;
-      --bg-card-hover: #1a2745;
-      --text: #e0e0e0;
-      --text-muted: #8892a4;
+      --bg: #0f1420;
+      --bg-card: #161d2e;
+      --bg-card-hover: #1d2740;
+      --text: #e6e9f0;
+      --text-muted: #8b97ad;
       --text-heading: #ffffff;
-      --accent: #4fc3f7;
-      --accent-hover: #81d4fa;
-      --border: #2a3a5c;
-      --bg-input: #0f1729;
-      --success: #66bb6a;
-      --danger: #ef5350;
-      --star: #ffd54f;
+      --accent: #5cc8ff;
+      --accent-hover: #86d6ff;
+      --accent-ink: #06121c;
+      --border: #253149;
+      --bg-input: #0b0f18;
+      --success: #5bd08b;
+      --danger: #ff6b6b;
+      --star: #ffd24a;
       --font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
     @media (prefers-color-scheme: light) {
       :root {
-        --bg: #ffffff;
-        --bg-card: #f4f6fa;
-        --bg-card-hover: #e9eefb;
-        --text: #333333;
-        --text-muted: #777777;
-        --text-heading: #111111;
-        --accent: #1976d2;
+        --bg: #f3f5f9;
+        --bg-card: #ffffff;
+        --bg-card-hover: #f0f5ff;
+        --text: #1f2633;
+        --text-muted: #6b7484;
+        --text-heading: #0d1320;
+        --accent: #1d7fd6;
         --accent-hover: #1565c0;
-        --border: #dde0e4;
-        --bg-input: #f0f0f0;
+        --accent-ink: #ffffff;
+        --border: #e1e5ec;
+        --bg-input: #f1f3f7;
         --success: #388e3c;
-        --danger: #d32f2f;
-        --star: #f9a825;
+        --danger: #d84343;
+        --star: #f6a609;
       }
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -51,7 +53,15 @@
       margin-bottom: 12px;
     }
     .pop-header h1 { font-size: 1.05rem; color: var(--text-heading); }
+    .pop-header .right { display: flex; align-items: center; gap: 8px; }
     .pop-header .count { font-size: 0.72rem; color: var(--text-muted); }
+    .streak-chip {
+      display: none; align-items: center; gap: 3px;
+      font-size: 0.74rem; font-weight: 700; color: var(--text-heading);
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 999px; padding: 2px 9px;
+    }
+    .streak-chip.show { display: inline-flex; }
 
     .section-label {
       font-size: 0.7rem;
@@ -111,7 +121,7 @@
       font-size: 0.82rem; cursor: pointer; font-family: var(--font);
       transition: background 0.12s;
     }
-    .btn-primary { background: var(--accent); color: #111; font-weight: 600; }
+    .btn-primary { background: var(--accent); color: var(--accent-ink); font-weight: 600; }
     .btn-primary:hover { background: var(--accent-hover); }
     .btn-ghost { background: transparent; color: var(--text-muted); border: 1px solid var(--border); }
     .btn-ghost:hover { background: var(--bg-card); color: var(--text); }
@@ -127,7 +137,7 @@
     .pop-footer { margin-top: 14px; }
     .open-library {
       width: 100%; padding: 10px; border: none; border-radius: 8px;
-      background: var(--accent); color: #111; font-weight: 700;
+      background: var(--accent); color: var(--accent-ink); font-weight: 700;
       font-size: 0.88rem; cursor: pointer; font-family: var(--font);
     }
     .open-library:hover { background: var(--accent-hover); }
@@ -136,7 +146,10 @@
 <body>
   <div class="pop-header">
     <h1>🎮 Game Hub</h1>
-    <span class="count" id="count"></span>
+    <div class="right">
+      <span class="streak-chip" id="streak-chip" title="Your daily-play streak">🔥 <span id="streak-num">0</span></span>
+      <span class="count" id="count"></span>
+    </div>
   </div>
 
   <div class="section-label">Favorites</div>

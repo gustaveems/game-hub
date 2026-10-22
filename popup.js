@@ -1,8 +1,9 @@
 import {
   getGames, addGame, recordPlay, normalizeUrl, pickFavorites, saveLocalGameBody,
-  getThumbCache
+  getThumbCache, getStats, recordDailyPlay
 } from './lib/storage.js';
 import { faviconUrl, hashColor, initials } from './lib/logo.js';
+import { effectiveStreak } from './lib/leaderboard.js';
 
 const $ = (s) => document.querySelector(s);
 let games = [];
@@ -13,6 +14,15 @@ async function init() {
   $('#count').textContent = `${games.length} game${games.length === 1 ? '' : 's'}`;
   thumbCache = await getThumbCache(games.map(g => g.id));
   renderFavorites();
+  showStreak();
+}
+
+async function showStreak() {
+  const streak = effectiveStreak(await getStats());
+  if (streak > 0) {
+    $('#streak-num').textContent = streak;
+    $('#streak-chip').classList.add('show');
+  }
 }
 
 function thumbSrc(g) {
@@ -72,6 +82,7 @@ async function launchFavorite(id) {
     chrome.tabs.create({ url: g.url });
   }
   await recordPlay(id);
+  if (g.tags.includes('daily')) await recordDailyPlay();
   window.close();
 }
 
