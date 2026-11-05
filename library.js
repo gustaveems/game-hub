@@ -1,7 +1,7 @@
 import {
-  getGames, addGame, updateGame, deleteGame, recordPlay,
+  getGames, addGame, updateGame, deleteGame, restoreGame, recordPlay,
   resetToStarter, normalizeUrl, saveLocalGameBody, getLocalGameBody,
-  getThumbCache, setThumbCache, pruneThumbCache,
+  getThumbCache, setThumbCache, pruneThumbCache, pruneLocalBodies, subscribe,
   getStats, recordDailyPlay, getProfile, setProfileName,
   getFriends, upsertFriend, removeFriend
 } from './lib/storage.js';
@@ -27,6 +27,7 @@ async function loadAndRender() {
   thumbCache = await getThumbCache(games.map(g => g.id));
   render();
   pruneThumbCache(games.map(g => g.id));
+  pruneLocalBodies(games.map(g => g.id));
   ensureThumbsCached();
 }
 
@@ -184,6 +185,13 @@ function wireRows(container) {
       if (e.target.closest('.row-menu-btn') || e.target.closest('.card-dropdown')) return;
       launchGame(row.dataset.id);
     });
+    // Only when the row itself has focus: Enter on the menu button or a menu item must not launch.
+    row.addEventListener('keydown', (e) => {
+      if (e.target === row && (e.key === 'Enter' || e.key === ' ')) {
+        e.preventDefault();
+        launchGame(row.dataset.id);
+      }
+    });
   });
   container.querySelectorAll('.row-menu-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
@@ -205,7 +213,9 @@ function wireRows(container) {
 function renderDailies(show) {
   const wrap = $('#dailies');
   const strip = $('#dailies-strip');
-  const dailies = games.filter(g => g.tags.includes('daily'));
+  // The strip is your own set: dailies you starred or have already opened. Everything else
+  // stays in the list below, so 190+ daily games don't turn it into a wall of tiles.
+  const dailies = games.filter(g => g.tags.includes('daily') && (g.favorite || g.playCount > 0));
 
   if (!show || dailies.length === 0) {
     wrap.classList.add('hidden');
@@ -228,7 +238,7 @@ function renderDailies(show) {
     const inner = g.thumbnail
       ? `<img class="cover" data-id="${g.id}" src="${escHtml(thumbSrc(g))}" alt="">`
       : logoTileHTML(g);
-    return `<div class="daily-tile${played ? ' played' : ''}" data-id="${g.id}" title="${escHtml(g.title)}">
+    return `<div class="daily-tile${played ? ' played' : ''}" data-id="${g.id}" title="${escHtml(g.title)}" tabindex="0" role="button" aria-label="${escHtml(g.title)}${played ? ', played today' : ''}">
       <div class="daily-thumb">${inner}</div>
       <div class="daily-name">${escHtml(g.title)}</div>
       ${played ? '<span class="daily-check">✓</span>' : ''}
@@ -237,6 +247,9 @@ function renderDailies(show) {
 
   strip.querySelectorAll('.daily-tile').forEach(tile => {
     tile.addEventListener('click', () => launchGame(tile.dataset.id));
+    tile.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); launchGame(tile.dataset.id); }
+    });
   });
   strip.querySelectorAll('img.cover[data-id]').forEach(img => {
     img.addEventListener('error', () => {
@@ -253,7 +266,7 @@ function logoTileHTML(g) {
   const fav = g.source === 'local' ? null : faviconUrl(g.url, 128);
   const ini = escHtml(initials(g.title));
   const inner = fav
-    ? `<img class="logo-img" src="${escHtml(fav)}" alt="" loading="lazy" onerror="this.classList.add('hidden');this.nextElementSibling.classList.remove('hidden')"><span class="logo-initials hidden">${ini}</span>`
+    ? `<img class="logo-img" src="${escHtml(fav)}" alt="" loading="lazy"><span class="logo-initials hidden">${ini}</span>`
     : `<span class="logo-initials">${ini}</span>`;
   return `<div class="logo-tile" style="--tile:${color}">${inner}</div>`;
 }
@@ -273,7 +286,7 @@ function rowHTML(g) {
   const menuOpen = openMenuId === g.id;
 
   return `
-    <div class="game-row" data-id="${g.id}">
+    <div class="game-row" data-id="${g.id}" tabindex="0" role="group" aria-label="${escHtml(g.title)}">
       <div class="row-thumb">${thumbHTML(g)}</div>
       <div class="row-body">
         <div class="row-title">${favStar}<span class="row-title-text">${escHtml(g.title)}</span></div>
@@ -433,11 +446,13 @@ function toggleMenu(id) {
           games = await updateGame(gid, { launchMode: g.launchMode === 'tab' ? 'embed' : 'tab' });
           render();
         } else if (action === 'delete') {
-          const g = games.find(x => x.id === gid);
-          if (confirm(`Delete "${g?.title}"?`)) {
-            games = await deleteGame(gid);
-          }
+          const result = await deleteGame(gid);
+          games = result;
           render();
+          if (result.removed) {
+            const removed = result.removed;
+            toast(`Deleted ${removed.title}`, { label: 'Undo', run: async () => { games = await restoreGame(removed); render(); } });
+          }
         }
       });
     });
@@ -548,6 +563,11 @@ async function handleSave() {
     return;
   }
 
+  if (!isLocal) {
+    const dup = games.find(g => g.id !== editingId && normalizeUrl(g.url) === normalizeUrl(url));
+    if (dup) { showMsg('url-error', `"${dup.title}" already uses this URL.`); return; }
+  }
+
   if (editingId) {
     games = await updateGame(editingId, {
       url: isLocal ? undefined : url,
@@ -595,7 +615,8 @@ document.addEventListener('keydown', (e) => {
     if (!$('#modal-add').classList.contains('hidden')) return closeAddModal();
     if (!$('#modal-leaderboard').classList.contains('hidden')) return closeLeaderboard();
   }
-  if (e.target.matches('input, textarea, select')) return;
+  if (e.target.matches('input, textarea, select') || e.metaKey || e.ctrlKey || e.altKey) return;
+  if (document.querySelector('.modal-overlay:not(.hidden), #embed-overlay:not(.hidden)')) return;
   if (e.key === '/') { e.preventDefault(); $('#search').focus(); }
   else if (e.key === 'n') { e.preventDefault(); openAddModal(); }
 });
@@ -811,3 +832,36 @@ function escHtml(str) {
 }
 
 loadAndRender();
+
+// --- Toast with optional action (used for Undo) ---
+let toastTimer;
+function toast(text, action) {
+  const el = $('#toast');
+  $('#toast-text').textContent = text;
+  const btn = $('#toast-action');
+  btn.classList.toggle('hidden', !action);
+  btn.onclick = null;
+  if (action) {
+    btn.textContent = action.label;
+    btn.onclick = () => { el.classList.remove('show'); action.run(); };
+  }
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), action ? 8000 : 2500);
+}
+
+// The inline onerror attribute is blocked by the extension's CSP, so image errors (which don't
+// bubble) are caught here instead and swap in the initials tile.
+document.addEventListener('error', (e) => {
+  const img = e.target;
+  if (img.tagName === 'IMG' && img.classList.contains('logo-img')) {
+    img.classList.add('hidden');
+    img.nextElementSibling?.classList.remove('hidden');
+  }
+}, true);
+
+// Keep this page in step with changes made by the popup or another tab.
+subscribe((changes) => {
+  if (!changes.games) return;
+  getGames().then((latest) => { games = latest; render(); });
+});

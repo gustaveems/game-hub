@@ -8,7 +8,8 @@
       "trivia",
       "daily"
     ],
-    "launchMode": "tab"
+    "launchMode": "tab",
+    "favorite": true
   },
   {
     "title": "TimeGuessr",
@@ -20,7 +21,8 @@
       "daily",
       "geography"
     ],
-    "launchMode": "tab"
+    "launchMode": "tab",
+    "favorite": true
   },
   {
     "title": "Dialed",
@@ -32,7 +34,8 @@
       "daily",
       "memory"
     ],
-    "launchMode": "tab"
+    "launchMode": "tab",
+    "favorite": true
   },
   {
     "title": "Framed",
@@ -44,7 +47,8 @@
       "daily",
       "movies"
     ],
-    "launchMode": "tab"
+    "launchMode": "tab",
+    "favorite": true
   },
   {
     "title": "Gamedle",
@@ -80,7 +84,8 @@
       "daily",
       "geography"
     ],
-    "launchMode": "tab"
+    "launchMode": "tab",
+    "favorite": true
   },
   {
     "title": "Globle",
@@ -92,7 +97,8 @@
       "daily",
       "geography"
     ],
-    "launchMode": "tab"
+    "launchMode": "tab",
+    "favorite": true
   },
   {
     "title": "Flagle",
@@ -204,7 +210,8 @@
       "word",
       "daily"
     ],
-    "launchMode": "tab"
+    "launchMode": "tab",
+    "favorite": true
   },
   {
     "title": "Connections",
@@ -216,7 +223,8 @@
       "daily",
       "puzzle"
     ],
-    "launchMode": "tab"
+    "launchMode": "tab",
+    "favorite": true
   },
   {
     "title": "The Mini Crossword",

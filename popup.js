@@ -67,7 +67,7 @@ function renderFavorites() {
 function logoMarkup(g) {
   const fav = g.source === 'local' ? null : faviconUrl(g.url, 64);
   if (fav) {
-    return `<img class="fav-logo" src="${esc(fav)}" alt="" onerror="this.outerHTML='<div class=\\'fav-logo-fallback\\' style=\\'background:${hashColor(g.title)}\\'>${esc(initials(g.title))}</div>'">`;
+    return `<img class="fav-logo" src="${esc(fav)}" alt="" data-title="${esc(g.title)}">`;
   }
   return `<div class="fav-logo-fallback" style="background:${hashColor(g.title)}">${esc(initials(g.title))}</div>`;
 }
@@ -174,3 +174,16 @@ function esc(str) {
 }
 
 init();
+
+// Inline onerror attributes are blocked by the extension's CSP; image errors don't bubble, so
+// they're caught in the capture phase and swapped for the initials tile.
+document.addEventListener('error', (e) => {
+  const img = e.target;
+  if (img.tagName !== 'IMG' || !img.classList.contains('fav-logo')) return;
+  const title = img.dataset.title || '';
+  const tile = document.createElement('div');
+  tile.className = 'fav-logo-fallback';
+  tile.style.background = hashColor(title);
+  tile.textContent = initials(title);
+  img.replaceWith(tile);
+}, true);
