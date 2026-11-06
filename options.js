@@ -1,4 +1,7 @@
-import { exportGames, importGames, resetToStarter, getStorageUsage, clearThumbCache } from './lib/storage.js';
+import {
+  exportGames, importGames, resetToStarter, getStorageUsage, clearThumbCache,
+  restoreSnapshot, getSnapshotInfo, getQuarantine
+} from './lib/storage.js';
 
 const $ = (s) => document.querySelector(s);
 
@@ -37,15 +40,22 @@ $('#file-import').addEventListener('change', async (e) => {
       return;
     }
 
-    const result = await importGames(data);
+    const replace = $('#chk-replace')?.checked;
+    if (replace && !confirm(`Replace your whole library with this file? You can step back afterwards.`)) {
+      e.target.value = '';
+      return;
+    }
+    const result = await importGames(data, { replace });
+    const dup = result.duplicates ? ` ${result.duplicates} already in your library.` : '';
     if (result.skipped.length > 0) {
-      msg.textContent = `Imported ${result.imported} games. Skipped entries at indices: ${result.skipped.join(', ')}.`;
+      msg.textContent = `Added ${result.imported} games.${dup} Skipped entries at indices: ${result.skipped.join(', ')}.`;
       msg.className = 'msg err';
     } else {
-      msg.textContent = `Imported ${result.imported} games successfully.`;
+      msg.textContent = `Added ${result.imported} games.${dup}`;
       msg.className = 'msg ok';
     }
     showUsage();
+    showUndo();
   } catch (err) {
     msg.textContent = 'Failed to parse file: ' + err.message;
     msg.className = 'msg err';
@@ -64,11 +74,42 @@ $('#btn-clear-cache').addEventListener('click', async () => {
 });
 
 $('#btn-reset').addEventListener('click', async () => {
-  if (!confirm('Reset your library to the starter games? All current games will be lost.')) return;
+  if (!confirm('Reset your library to the starter games? You can step back afterwards.')) return;
   await resetToStarter();
   $('#reset-msg').textContent = 'Library reset to starter games.';
   $('#reset-msg').className = 'msg ok';
   showUsage();
+  showUndo();
+});
+
+// Offered after an import-replace or a reset, until the next one.
+async function showUndo() {
+  const info = await getSnapshotInfo();
+  const btn = $('#btn-undo');
+  btn.classList.toggle('hidden', !info);
+  if (info) btn.textContent = `Step back to previous library (${info.count} games)`;
+  const damaged = await getQuarantine();
+  const dl = $('#btn-damaged');
+  dl.classList.toggle('hidden', !damaged.length);
+  dl.textContent = `Download ${damaged.length} damaged entries that were set aside`;
+}
+
+$('#btn-undo').addEventListener('click', async () => {
+  const n = await restoreSnapshot();
+  $('#reset-msg').textContent = `Stepped back to ${n} games.`;
+  $('#reset-msg').className = 'msg ok';
+  showUsage();
+  showUndo();
+});
+
+$('#btn-damaged').addEventListener('click', async () => {
+  const blob = new Blob([JSON.stringify(await getQuarantine(), null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'game-hub-damaged-entries.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
 });
 
 showUsage();
+showUndo();

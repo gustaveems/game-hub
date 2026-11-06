@@ -8,7 +8,8 @@
       "trivia",
       "daily"
     ],
-    "launchMode": "tab"
+    "launchMode": "tab",
+    "favorite": true
   },
   {
     "title": "TimeGuessr",
@@ -20,7 +21,8 @@
       "daily",
       "geography"
     ],
-    "launchMode": "tab"
+    "launchMode": "tab",
+    "favorite": true
   },
   {
     "title": "Dialed",
@@ -32,7 +34,8 @@
       "daily",
       "memory"
     ],
-    "launchMode": "tab"
+    "launchMode": "tab",
+    "favorite": true
   },
   {
     "title": "Framed",
@@ -44,7 +47,8 @@
       "daily",
       "movies"
     ],
-    "launchMode": "tab"
+    "launchMode": "tab",
+    "favorite": true
   },
   {
     "title": "Gamedle",
@@ -80,7 +84,8 @@
       "daily",
       "geography"
     ],
-    "launchMode": "tab"
+    "launchMode": "tab",
+    "favorite": true
   },
   {
     "title": "Globle",
@@ -92,7 +97,8 @@
       "daily",
       "geography"
     ],
-    "launchMode": "tab"
+    "launchMode": "tab",
+    "favorite": true
   },
   {
     "title": "Flagle",
@@ -204,7 +210,8 @@
       "word",
       "daily"
     ],
-    "launchMode": "tab"
+    "launchMode": "tab",
+    "favorite": true
   },
   {
     "title": "Connections",
@@ -216,7 +223,8 @@
       "daily",
       "puzzle"
     ],
-    "launchMode": "tab"
+    "launchMode": "tab",
+    "favorite": true
   },
   {
     "title": "The Mini Crossword",
@@ -841,5 +849,1981 @@
       "classic"
     ],
     "launchMode": "tab"
+  },
+  {
+    "title": "Fermi",
+    "url": "https://fermi.gg/",
+    "description": "Three daily estimation questions about numbers nobody knows offhand.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "estimation",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Catfishing",
+    "url": "https://catfishing.net/",
+    "description": "Identify a Wikipedia article from only its category tags.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "GnarlyQ",
+    "url": "https://gnarlyq.com/",
+    "description": "Pick the five correct answers out of ten, racing a timer.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Daily Dozen Trivia",
+    "url": "https://dailydozentrivia.com/",
+    "description": "Nine trivia questions in a grid of shifting categories.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Daily Tens",
+    "url": "https://dailytens.com/",
+    "description": "Name as many of a category's top 10 as you can before five misses.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Peekpedia",
+    "url": "https://peekpedia.com/",
+    "description": "Identify a Wikipedia article from a mystery photo.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Rankle",
+    "url": "https://www.rankle.app/",
+    "description": "Put six items in the right order for the day's category.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Quiple",
+    "url": "https://quiple.xyz/",
+    "description": "Match 15 items into five themed trios.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Million Whys",
+    "url": "https://millionwhys.com/trivia-question-of-the-day",
+    "description": "Pick the correct scientific explanation for an everyday phenomenon.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "science",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Centumth",
+    "url": "https://www.centumth.com/",
+    "description": "Name items that rank closest to #100 in the day's category.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Feudle",
+    "url": "https://feudlegame.com/",
+    "description": "Guess the most common answers real players gave to a prompt.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Orbs",
+    "url": "https://dailyorbs.com/",
+    "description": "Four puzzles in varied formats; collect six orbs before you lose your hearts.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Disorderly",
+    "url": "https://playdisorderly.com/",
+    "description": "Sort items from highest to lowest using real statistics.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Daily Fact or Fiction",
+    "url": "https://dailyfactorfiction.com/",
+    "description": "One statement a day: true or false, with a short explanation.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "More/Less",
+    "url": "https://lessgames.com/moreless",
+    "description": "Pick which item has the higher value; a wrong pick ends your streak.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Songless",
+    "url": "https://lessgames.com/songless",
+    "description": "Identify a song from a short clip; more is unlocked after each wrong guess.",
+    "thumbnail": null,
+    "tags": [
+      "music",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Majority Game",
+    "url": "https://www.majoritygame.com/",
+    "description": "Predict the answer most other players will give.",
+    "thumbnail": null,
+    "tags": [
+      "opinion",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "The Split",
+    "url": "https://www.timecube.in/",
+    "description": "Answer a yes/no question and estimate what share of players will say yes.",
+    "thumbnail": null,
+    "tags": [
+      "opinion",
+      "estimation",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Estimate Me",
+    "url": "https://estimate-me.aukspot.com/",
+    "description": "Count the items in a photographed container in three tries.",
+    "thumbnail": null,
+    "tags": [
+      "estimation",
+      "visual",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Size It Up",
+    "url": "https://magnitudle.com/size-it-up",
+    "description": "Resize a silhouette until it matches the true scale of a reference.",
+    "thumbnail": null,
+    "tags": [
+      "estimation",
+      "visual",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Juxtastat",
+    "url": "https://urbanstats.org/quiz.html",
+    "description": "Pick which of two regions ranks higher on a given statistic.",
+    "thumbnail": null,
+    "tags": [
+      "geography",
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "MapTap",
+    "url": "https://maptap.gg/",
+    "description": "Drop pins on a world map for five cities; closer is better.",
+    "thumbnail": null,
+    "tags": [
+      "geography",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "GeoGrid",
+    "url": "https://www.geogridgame.com/",
+    "description": "Place countries on a 3x3 board so each matches its row and column clues.",
+    "thumbnail": null,
+    "tags": [
+      "geography",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "MapGame",
+    "url": "https://mapgame.net/",
+    "description": "Click a world map to guess a hidden country, with hints.",
+    "thumbnail": null,
+    "tags": [
+      "geography",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Wikitrivia",
+    "url": "https://wikitrivia.tomjwatson.com/daily",
+    "description": "Place event cards on a timeline; three mistakes allowed.",
+    "thumbnail": null,
+    "tags": [
+      "history",
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Timeline",
+    "url": "https://www.fromthethink.com/timeline",
+    "description": "Guess the years of six historical events.",
+    "thumbnail": null,
+    "tags": [
+      "history",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Guess The Logo",
+    "url": "https://guessthelogo.wtf/",
+    "description": "Identify a brand from a heavily blurred logo.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "visual",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Spotle",
+    "url": "https://spotle.io/",
+    "description": "Guess a mystery artist from the most-streamed acts on Spotify.",
+    "thumbnail": null,
+    "tags": [
+      "music",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "CineNerdle",
+    "url": "https://www.cinenerdle.app/",
+    "description": "Swap actor, character, and plot tiles on a 4x4 grid to match hidden films.",
+    "thumbnail": null,
+    "tags": [
+      "movies",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Movie Grid",
+    "url": "https://moviegrid.io/",
+    "description": "Fill a 3x3 grid with movies matching row and column clues.",
+    "thumbnail": null,
+    "tags": [
+      "movies",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Bracket City",
+    "url": "https://www.theatlantic.com/games/bracket-city/",
+    "description": "Solve nested bracketed clues, innermost first, to reveal a sentence.",
+    "thumbnail": null,
+    "tags": [
+      "word",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Minute Cryptic",
+    "url": "https://www.minutecryptic.com/",
+    "description": "One cryptic crossword clue a day.",
+    "thumbnail": null,
+    "tags": [
+      "word",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Clues By Sam",
+    "url": "https://cluesbysam.com/",
+    "description": "Deduce who is innocent or guilty on a grid of 20 people.",
+    "thumbnail": null,
+    "tags": [
+      "logic",
+      "daily",
+      "puzzle"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Murdle",
+    "url": "https://murdle.com/",
+    "description": "Work out the culprit, weapon, and location from clues.",
+    "thumbnail": null,
+    "tags": [
+      "logic",
+      "daily",
+      "puzzle"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "The Wiki Game Daily",
+    "url": "https://www.thewikigamedaily.com/",
+    "description": "Click through Wikipedia links to reach a target article in the fewest clicks.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "NYT Strands",
+    "url": "https://www.nytimes.com/games/strands",
+    "description": "Find themed words in a letter grid.",
+    "thumbnail": null,
+    "tags": [
+      "word",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Guess The Angle",
+    "url": "https://guesstheangle.wtf/",
+    "description": "Guess the size of a drawn angle in four tries with higher/lower hints.",
+    "thumbnail": null,
+    "tags": [
+      "estimation",
+      "visual",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Cropple",
+    "url": "https://cropple.app/",
+    "description": "Name an everyday object from an extreme close-up crop that widens with each miss.",
+    "thumbnail": null,
+    "tags": [
+      "visual",
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Guess The House",
+    "url": "https://guessthe.house/",
+    "description": "Pin down a property's listing price from its photos in six tries.",
+    "thumbnail": null,
+    "tags": [
+      "estimation",
+      "visual",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Auctimate",
+    "url": "https://guessdash.com/auctimate",
+    "description": "Estimate the final sale price of US government surplus auction items.",
+    "thumbnail": null,
+    "tags": [
+      "estimation",
+      "visual",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Centroid",
+    "url": "https://centroidgame.com/",
+    "description": "Click where you think a shape's center of mass is.",
+    "thumbnail": null,
+    "tags": [
+      "estimation",
+      "visual",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "BallotGuessr",
+    "url": "https://ballotguessr.com/daily",
+    "description": "Guess how a US county voted in 2024 from a Street View scene.",
+    "thumbnail": null,
+    "tags": [
+      "geography",
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Face Guessr",
+    "url": "https://www.faceguesser.com/",
+    "description": "Identify a famous person from a blurry image that clears with each miss.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "visual",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Thingdle",
+    "url": "https://thingdle.app/thingdle",
+    "description": "Identify an everyday object from a riddle using comparison rows.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Statele",
+    "url": "https://statele.teuteuf.fr/",
+    "description": "Name a US state from its outline with distance and direction hints.",
+    "thumbnail": null,
+    "tags": [
+      "geography",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "GeoQuest",
+    "url": "https://geoquest.gg/",
+    "description": "Find named countries by clicking their locations on a world map.",
+    "thumbnail": null,
+    "tags": [
+      "geography",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "TravelGuessr",
+    "url": "https://travelguessr.com/",
+    "description": "Pin the locations of four travel photos on a world map.",
+    "thumbnail": null,
+    "tags": [
+      "geography",
+      "visual",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "WhereTaken",
+    "url": "https://wheretaken.teuteuf.fr/",
+    "description": "Guess the country in a photo with distance and direction clues.",
+    "thumbnail": null,
+    "tags": [
+      "geography",
+      "visual",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Neighborle",
+    "url": "https://neighborle.com/",
+    "description": "Name every country that borders a given nation.",
+    "thumbnail": null,
+    "tags": [
+      "geography",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Countryle",
+    "url": "https://www.countryle.com/",
+    "description": "Guess a hidden country using continent, climate, population and direction hints.",
+    "thumbnail": null,
+    "tags": [
+      "geography",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Capitalibrate",
+    "url": "https://guessdash.com/capitalibrate",
+    "description": "Guess the bearing and distance between two world capitals.",
+    "thumbnail": null,
+    "tags": [
+      "geography",
+      "estimation",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Yeardle",
+    "url": "https://histordle.com/yeardle",
+    "description": "Guess the year from three events in eight tries.",
+    "thumbnail": null,
+    "tags": [
+      "history",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "WhichYear",
+    "url": "https://whichyr.com/",
+    "description": "Estimate the year a photo was taken, 1850 to 2025.",
+    "thumbnail": null,
+    "tags": [
+      "history",
+      "visual",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Ripple",
+    "url": "https://ripplegame.app/",
+    "description": "Start from a real event and choose what happened next.",
+    "thumbnail": null,
+    "tags": [
+      "history",
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Chronle",
+    "url": "https://chronle.com/",
+    "description": "Arrange six events from oldest to newest.",
+    "thumbnail": null,
+    "tags": [
+      "history",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "enclose.horse",
+    "url": "https://enclose.horse/",
+    "description": "Wall in a horse with a limited number of barriers.",
+    "thumbnail": null,
+    "tags": [
+      "logic",
+      "daily",
+      "puzzle"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Gerrymandle",
+    "url": "https://gerrymandle.com/",
+    "description": "Divide a hex grid into districts so your party wins.",
+    "thumbnail": null,
+    "tags": [
+      "logic",
+      "trivia",
+      "daily",
+      "puzzle"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Stars",
+    "url": "https://inkwellgames.com/games/stars",
+    "description": "Place two stars in each row, column and region without touching.",
+    "thumbnail": null,
+    "tags": [
+      "logic",
+      "daily",
+      "puzzle"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Sumplete",
+    "url": "https://sumplete.com/",
+    "description": "Cross out cells so each row and column hits its target sum.",
+    "thumbnail": null,
+    "tags": [
+      "logic",
+      "daily",
+      "puzzle"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Plot-Hole",
+    "url": "https://plot-hole.com/",
+    "description": "Identify a film from up to five increasingly specific clues.",
+    "thumbnail": null,
+    "tags": [
+      "movies",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Movie to Movie",
+    "url": "https://movietomovie.com/",
+    "description": "Link two films through shared actors.",
+    "thumbnail": null,
+    "tags": [
+      "movies",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Typecasted",
+    "url": "https://typecasted.xyz/",
+    "description": "Connect films and actors in a Six Degrees of Kevin Bacon chain.",
+    "thumbnail": null,
+    "tags": [
+      "movies",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Heardle Daily",
+    "url": "https://www.heardle.info/daily",
+    "description": "Identify a well-known song from a short clip in six tries.",
+    "thumbnail": null,
+    "tags": [
+      "music",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Lyricle",
+    "url": "https://www.lyricle.app/",
+    "description": "Name the song and artist from a single lyric line.",
+    "thumbnail": null,
+    "tags": [
+      "music",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "MeloGuessr",
+    "url": "https://meloguessr.com/",
+    "description": "Listen to a song, then pin where in the world it originated.",
+    "thumbnail": null,
+    "tags": [
+      "music",
+      "geography",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Relatle",
+    "url": "https://relatle.io/",
+    "description": "Connect two artists through related artists in the fewest moves.",
+    "thumbnail": null,
+    "tags": [
+      "music",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "F1 Sportdle",
+    "url": "https://www.sportdle.net/f1-wordle",
+    "description": "Identify a hidden Formula 1 driver from colour-coded clues.",
+    "thumbnail": null,
+    "tags": [
+      "sports",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "HoopGrids",
+    "url": "https://www.hoopgrids.com/",
+    "description": "Fill a 3x3 grid with basketball players matching row and column clues.",
+    "thumbnail": null,
+    "tags": [
+      "sports",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Puckdoku",
+    "url": "https://www.puckdoku.com/",
+    "description": "Fill a 3x3 grid with NHL players matching both clues.",
+    "thumbnail": null,
+    "tags": [
+      "sports",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Futbol 11",
+    "url": "https://futbol11.com/futbol11",
+    "description": "Build a starting 11 by naming a player from each drawn country.",
+    "thumbnail": null,
+    "tags": [
+      "sports",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Scoric",
+    "url": "https://scoricquiz.com/",
+    "description": "Football quiz: name team lists, compare stats and order moments.",
+    "thumbnail": null,
+    "tags": [
+      "sports",
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Immaculate Footy",
+    "url": "https://www.sports-reference.com/immaculate-footy/",
+    "description": "Name a footballer matching both criteria in each grid square.",
+    "thumbnail": null,
+    "tags": [
+      "sports",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "LoLdle",
+    "url": "https://loldle.net/classic",
+    "description": "Identify a League of Legends champion by comparing traits.",
+    "thumbnail": null,
+    "tags": [
+      "video-games",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Pokedle",
+    "url": "https://pokedle.com/",
+    "description": "Guess a hidden Pokemon by comparing traits.",
+    "thumbnail": null,
+    "tags": [
+      "video-games",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Minecraftle",
+    "url": "https://minecraftle.zachmanson.com/",
+    "description": "Craft the secret Minecraft item on a 3x3 grid in 10 tries.",
+    "thumbnail": null,
+    "tags": [
+      "video-games",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Steamdle",
+    "url": "https://steamdle.com/",
+    "description": "Identify a Steam game from its user reviews.",
+    "thumbnail": null,
+    "tags": [
+      "video-games",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Conexo",
+    "url": "https://conexo.ws/en",
+    "description": "Sort 16 words into four hidden groups.",
+    "thumbnail": null,
+    "tags": [
+      "word",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Decodex",
+    "url": "https://playdecodex.com/",
+    "description": "Decode a famous quote written in a substitution cipher.",
+    "thumbnail": null,
+    "tags": [
+      "word",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "CHN LNK",
+    "url": "https://thechnlnk.com/",
+    "description": "Fill a chain of words, each linking to the next, to form a phrase.",
+    "thumbnail": null,
+    "tags": [
+      "word",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "23 Words",
+    "url": "https://wordnerd.co/23words",
+    "description": "Unscramble letters into words and clear 23 rounds in a row.",
+    "thumbnail": null,
+    "tags": [
+      "word"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Chemdle",
+    "url": "https://www.chemdle.com/",
+    "description": "Work out the product of an organic chemistry reaction.",
+    "thumbnail": null,
+    "tags": [
+      "nature",
+      "science",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Elemingle",
+    "url": "https://elemingle.com/",
+    "description": "Narrow down a hidden element by swiping higher or lower.",
+    "thumbnail": null,
+    "tags": [
+      "nature",
+      "science",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Fishdle",
+    "url": "https://tacklevillage.com/fishdle-game",
+    "description": "Identify a silhouetted fish.",
+    "thumbnail": null,
+    "tags": [
+      "nature",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Colorfle",
+    "url": "https://colorfle.com/",
+    "description": "Guess the three colors that mix to a shown swatch.",
+    "thumbnail": null,
+    "tags": [
+      "colors",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Hexcodle",
+    "url": "https://www.hexcodle.com/",
+    "description": "Guess a color's six-digit hex code in five attempts.",
+    "thumbnail": null,
+    "tags": [
+      "colors",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Anything Grid",
+    "url": "https://anythinggrid.com/",
+    "description": "Fill a 3x3 grid with answers matching row and column categories.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Coindle",
+    "url": "https://coindle.muhashi.com/",
+    "description": "Predict heads or tails; your streak is your score.",
+    "thumbnail": null,
+    "tags": [
+      "daily",
+      "puzzle"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Subwaydle",
+    "url": "https://www.subwaydle.com/",
+    "description": "Identify the three-train NYC subway route between two stations.",
+    "thumbnail": null,
+    "tags": [
+      "transport",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Cardle",
+    "url": "https://www.playcardle.com/",
+    "description": "Identify a car's make, model and year from a cropped photo.",
+    "thumbnail": null,
+    "tags": [
+      "transport",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Foodguessr",
+    "url": "https://foodguessr.com/",
+    "description": "Guess which country or region a dish comes from.",
+    "thumbnail": null,
+    "tags": [
+      "food",
+      "geography",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Artle",
+    "url": "https://www.nga.gov/artle.html",
+    "description": "Name an artwork's artist; wrong guesses reveal more pieces.",
+    "thumbnail": null,
+    "tags": [
+      "art",
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "LinkedIn Zip",
+    "url": "https://www.linkedin.com/games/zip",
+    "description": "Draw a path linking numbered dots in order. No account needed.",
+    "thumbnail": null,
+    "tags": [
+      "logic",
+      "daily",
+      "puzzle"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "The New Daily Trivia",
+    "url": "https://www.thenewdaily.com.au/puzzles/quiz-trivia",
+    "description": "Ten multiple-choice questions in a category you pick.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "VocabPop",
+    "url": "https://vocabpop.com/",
+    "description": "Pick the true meaning of an unusual word.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "word",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Doctordle",
+    "url": "https://doctordle.org/",
+    "description": "Read a patient case and name the diagnosis in five tries.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "science",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Guessly",
+    "url": "https://guessly.me/",
+    "description": "Three daily riddles; it roasts you when you fail.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Musiqal",
+    "url": "https://www.play-musiqal.com/",
+    "description": "Hear five 30-second clips and guess each song's release year.",
+    "thumbnail": null,
+    "tags": [
+      "music",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Brawldle",
+    "url": "https://brawldle.live/",
+    "description": "Guess the day's Brawl Stars brawler across six modes.",
+    "thumbnail": null,
+    "tags": [
+      "video-games",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "The Sagle",
+    "url": "https://www.thesagle.com/",
+    "description": "Wordle for gamers: guess the daily video game saga.",
+    "thumbnail": null,
+    "tags": [
+      "video-games",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Daily Guesser: Video Games",
+    "url": "https://dailyguesser.com/video-game",
+    "description": "Guess a mystery game from metadata, clues and release history.",
+    "thumbnail": null,
+    "tags": [
+      "video-games",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "sixhints",
+    "url": "https://sixhints.com/",
+    "description": "Guess a word from six clues that get more specific.",
+    "thumbnail": null,
+    "tags": [
+      "word",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "One More Letter",
+    "url": "https://playonemoreletter.com/",
+    "description": "Daily word puzzle with a unique letter mechanic.",
+    "thumbnail": null,
+    "tags": [
+      "word",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Hisorty",
+    "url": "https://hisorty.app/",
+    "description": "Sort six historical events into chronological order.",
+    "thumbnail": null,
+    "tags": [
+      "history",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Wikigacha",
+    "url": "https://wikigacha.com/",
+    "description": "Collect and battle with cards made from Wikipedia articles.",
+    "thumbnail": null,
+    "tags": [
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "The Daily Cryptic",
+    "url": "https://thedailycryptic.com/",
+    "description": "One cryptic crossword clue a day.",
+    "thumbnail": null,
+    "tags": [
+      "word",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Tower of Questions",
+    "url": "https://towerofquestions.com/",
+    "description": "Climb a seven-floor tower of multiple-choice trivia; one miss ends your run.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Trivmount",
+    "url": "https://www.trivmount.com/home",
+    "description": "Answer 12 trivia questions to climb a mountain; one wrong answer ends it.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "FactStack",
+    "url": "https://factstackgame.com/",
+    "description": "Order five items by a stated rule such as date, size or population.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Close Enough",
+    "url": "https://closeenough.fun/?game=close-enough",
+    "description": "Estimate five real-world numbers without looking anything up.",
+    "thumbnail": null,
+    "tags": [
+      "estimation",
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Estimatle",
+    "url": "https://estimatle.com/",
+    "description": "Guess five numbers with a slider; closer scores more.",
+    "thumbnail": null,
+    "tags": [
+      "estimation",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "ALLEGEDLY",
+    "url": "https://playallegedly.com/",
+    "description": "Guess the celebrity from a blind item in three strikes.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Yearbook",
+    "url": "https://yearbook.hindsightgames.com/",
+    "description": "Guess the year four clues from different categories share.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "history",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Roster Relay",
+    "url": "https://rosterrelay.hindsightgames.com/",
+    "description": "Link two players through teammates from the same franchise and season.",
+    "thumbnail": null,
+    "tags": [
+      "sports",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "The Daily Lineup",
+    "url": "https://timelineguesser.com/daily",
+    "description": "Build one timeline from mixed movies, songs and presidents.",
+    "thumbnail": null,
+    "tags": [
+      "history",
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Name The ___",
+    "url": "https://ethanbradley.art/games/name-the.html",
+    "description": "Name a film still, show, painting, photo and book passage.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "art",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "DSMdle",
+    "url": "https://www.dsmdle.com/",
+    "description": "Identify the DSM-5 diagnosis behind a clinical case.",
+    "thumbnail": null,
+    "tags": [
+      "trivia",
+      "science",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Country Draw",
+    "url": "https://countrydraw.games/",
+    "description": "Draw a highlighted country's border from memory.",
+    "thumbnail": null,
+    "tags": [
+      "geography",
+      "visual",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "CountryTuner",
+    "url": "https://countrytuner.com/daily",
+    "description": "Fix a country's outline by adjusting shape, orientation and relative size.",
+    "thumbnail": null,
+    "tags": [
+      "geography",
+      "visual",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "TerraeQuest",
+    "url": "https://terraequest.com/",
+    "description": "Four country puzzles: extremes, outliers and closest-to-target.",
+    "thumbnail": null,
+    "tags": [
+      "geography",
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "StatesQuest",
+    "url": "https://statesquest.com/",
+    "description": "Compare US states across seven cards and four challenge types.",
+    "thumbnail": null,
+    "tags": [
+      "geography",
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Trackdyl",
+    "url": "https://g33z3r.com/games/trackdyl",
+    "description": "Identify the artist behind a blurred 1960s-90s album cover.",
+    "thumbnail": null,
+    "tags": [
+      "music",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Radical Radio Recall",
+    "url": "https://g33z3r.com/games/radio-recall",
+    "description": "Name an 80s or 90s hit from a one-second clip.",
+    "thumbnail": null,
+    "tags": [
+      "music",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Year To Beat",
+    "url": "https://yeartobeat.com/",
+    "description": "Guess the release year of five music videos.",
+    "thumbnail": null,
+    "tags": [
+      "music",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Logpose",
+    "url": "https://onepiecedle.fr/",
+    "description": "Identify a hidden One Piece character by comparing traits.",
+    "thumbnail": null,
+    "tags": [
+      "video-games",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Size It Up: Pop Culture",
+    "url": "https://magnitudle.com/size-it-up/pop-culture",
+    "description": "Resize a movie, TV or game silhouette to its true scale.",
+    "thumbnail": null,
+    "tags": [
+      "estimation",
+      "visual",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "FilmLink",
+    "url": "https://www.filmlink.io/",
+    "description": "Connect two films through shared actors, directors or writers.",
+    "thumbnail": null,
+    "tags": [
+      "movies",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "TV-Addict",
+    "url": "https://tv-addict.com/",
+    "description": "Name a TV show from plot clues that appear one at a time.",
+    "thumbnail": null,
+    "tags": [
+      "movies",
+      "trivia",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "The Daily Burgle",
+    "url": "https://www.thedailyburgle.app/",
+    "description": "Name movies whose plots hide vault words.",
+    "thumbnail": null,
+    "tags": [
+      "movies",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "AITA Guesser",
+    "url": "https://muhashi.com/aita-guesser",
+    "description": "Judge three r/AmItheAsshole posts against the community verdict.",
+    "thumbnail": null,
+    "tags": [
+      "opinion",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Scrandle",
+    "url": "https://scrandle.com/",
+    "description": "Pick the higher-rated of two football-stadium snacks.",
+    "thumbnail": null,
+    "tags": [
+      "food",
+      "sports",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Candlestick",
+    "url": "https://candlestick.gg/candlestick/",
+    "description": "Predict where a hidden real market chart goes in the next 10 trading days.",
+    "thumbnail": null,
+    "tags": [
+      "estimation",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Long Story Short",
+    "url": "https://sheets.works/long-story-short",
+    "description": "Pick the five words that best preserve a long news sentence.",
+    "thumbnail": null,
+    "tags": [
+      "word",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Grid Words",
+    "url": "https://gridwordsgame.com/",
+    "description": "Clue-free mini crossword where every row and column is a word.",
+    "thumbnail": null,
+    "tags": [
+      "word",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Lexagon",
+    "url": "https://www.lexagon.com/",
+    "description": "Connect hexagon tiles to spell words.",
+    "thumbnail": null,
+    "tags": [
+      "word",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Noodle",
+    "url": "https://noodlepuzzle.com/",
+    "description": "Transform a word through four edit types, keeping every step valid.",
+    "thumbnail": null,
+    "tags": [
+      "word",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Blankle",
+    "url": "https://blankle.app/",
+    "description": "Find the hidden word that pairs with four clues.",
+    "thumbnail": null,
+    "tags": [
+      "word",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "SPAN",
+    "url": "https://span-game.com/",
+    "description": "Guess a hidden 4 to 9 letter word in seven attempts.",
+    "thumbnail": null,
+    "tags": [
+      "word",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Broken Words",
+    "url": "https://www.brokenwords.com/",
+    "description": "Rebuild answers from shuffled letter fragments.",
+    "thumbnail": null,
+    "tags": [
+      "word",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Neograms",
+    "url": "https://neograms.app/",
+    "description": "Decode an invented language by matching symbols to English.",
+    "thumbnail": null,
+    "tags": [
+      "word",
+      "logic",
+      "daily",
+      "puzzle"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Fridgle",
+    "url": "https://fridgle.net/",
+    "description": "Arrange the same fridge-magnet tiles into a poem.",
+    "thumbnail": null,
+    "tags": [
+      "word",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "WordEq",
+    "url": "https://wordeq.app/",
+    "description": "Replace two clue words so they combine into one word.",
+    "thumbnail": null,
+    "tags": [
+      "word",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "MidWord",
+    "url": "https://midword.com/",
+    "description": "Find a hidden word using before/after alphabetical clues.",
+    "thumbnail": null,
+    "tags": [
+      "word",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Three Letters Game",
+    "url": "https://threelettersgame.com/",
+    "description": "Type a word that starts with the first letter and has the second before the third.",
+    "thumbnail": null,
+    "tags": [
+      "word",
+      "daily"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Corporate Mind Games",
+    "url": "https://corporatemindgames.com/",
+    "description": "Three office-themed logic puzzles including an org chart of humans and AI.",
+    "thumbnail": null,
+    "tags": [
+      "logic",
+      "daily",
+      "puzzle"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Unlabeled",
+    "url": "https://unlabeled.dev/",
+    "description": "Restore missing axis labels on four charts.",
+    "thumbnail": null,
+    "tags": [
+      "logic",
+      "daily",
+      "puzzle"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Thinky Dailies",
+    "url": "https://thinkygames.com/dailies/",
+    "description": "Custom daily logic puzzles, each with its own rules.",
+    "thumbnail": null,
+    "tags": [
+      "logic",
+      "daily",
+      "puzzle"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Mirror Mirror",
+    "url": "https://mirrormirrorgame.com/",
+    "description": "Freehand-draw the mirror image of a sketch.",
+    "thumbnail": null,
+    "tags": [
+      "visual",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Cutle",
+    "url": "https://pfiffel.com/cutle",
+    "description": "Split a shape into two equal halves with one cut.",
+    "thumbnail": null,
+    "tags": [
+      "visual",
+      "logic",
+      "daily",
+      "trivia",
+      "puzzle"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Gauntle",
+    "url": "https://gauntle.com/",
+    "description": "Chain 11 short puzzles into one timed run.",
+    "thumbnail": null,
+    "tags": [
+      "logic",
+      "daily",
+      "puzzle"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "RNGdle",
+    "url": "https://www.rngdle.com/",
+    "description": "Roll one random number and score it for patterns.",
+    "thumbnail": null,
+    "tags": [
+      "daily",
+      "puzzle"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Angle",
+    "url": "https://angle.wtf/",
+    "description": "Estimate the degrees of a drawn angle in four guesses.",
+    "thumbnail": null,
+    "tags": [
+      "estimation",
+      "daily",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Sections",
+    "url": "https://www.sectionspuzzle.com/",
+    "description": "Sudoku-like puzzle with sections split by bars.",
+    "thumbnail": null,
+    "tags": [
+      "logic",
+      "daily",
+      "puzzle"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Clue Raider",
+    "url": "https://clueraider.com/",
+    "description": "Place every explorer on a 7x7 grid using clues.",
+    "thumbnail": null,
+    "tags": [
+      "logic",
+      "daily",
+      "puzzle"
+    ],
+    "launchMode": "tab",
+    "since": 3
+  },
+  {
+    "title": "Kinda Hard Golf",
+    "url": "https://kindahardgolf.com/",
+    "description": "Pull back, release and climb a vertical course to the flag.",
+    "thumbnail": null,
+    "tags": [
+      "sports",
+      "trivia"
+    ],
+    "launchMode": "tab",
+    "since": 3
   }
 ]

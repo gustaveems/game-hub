@@ -1,6 +1,6 @@
 # Game Hub
 
-A Chrome extension that gives you a personal library of browser games. Click the toolbar icon for a quick-launch popup of your favorites, and open the full library in its own tab. Comes with ~70 curated games (trivia/daily-puzzle heavy) and lets you add your own by URL or by uploading an HTML file. It does **not** take over your new-tab page.
+A Chrome extension that gives you a personal library of browser games. Click the toolbar icon for a quick-launch popup of your favorites, and open the full library in its own tab. Comes with 225 curated games (trivia and daily-puzzle heavy) and lets you add your own by URL or by uploading an HTML file. It does **not** take over your new-tab page.
 
 > **Related:** [Link Collector](https://github.com/gustaveems/link-collector) — a companion extension that grabs the links from all your open tabs as one block of text.
 
@@ -54,6 +54,24 @@ Click **🏆 Leaderboard** in the library to compete with friends on your **dail
 - **Backend:** a Neon Postgres database exposed through the Neon Data API (PostgREST). The extension gets a short-lived anonymous JWT from Neon Auth and reads/writes a single `leaderboard` table. Your row is keyed by a random local id, so you update your own entry rather than creating duplicates.
 - **Security, honestly:** the board is **login-free, so it's self-reported** — anyone who inspects the (public) endpoint could submit a fake streak. Guardrails cap values to sane ranges, force server-side timestamps, and block deletes, but this is a fun board, not an audited ranking. For a tamper-resistant version you'd add real per-user auth.
 - **Config:** the Data API and Auth URLs live in [`lib/global.js`](lib/global.js). To point at your own Neon project, provision a Data API + Neon Auth, create the `leaderboard` table (see `db/schema.sql`), and swap the two URLs.
+
+## Safety and data
+
+- **Safe across tabs.** Every change re-reads the latest library under a lock shared by the popup, the library and the options page, so a stale tab can't overwrite changes made elsewhere. Open pages refresh themselves when the library changes.
+- **Undo.** Deleting a game shows an Undo button. An import with "Replace" and a starter reset both keep the previous library, and the Options page can step back to it.
+- **Import merges** by default and skips games whose URL is already in your library.
+- **Nothing is dropped silently.** Damaged entries are set aside (downloadable from Options) and a corrupted library value is kept before the starter list is restored.
+- **Updates add new starter games once.** Games you deleted stay deleted.
+- **Keyboard.** Library rows and daily tiles are focusable; Enter or Space opens a game.
+
+## Development
+
+```bash
+npm install
+npm run check      # eslint + tests
+npm run preview    # serves library.html at http://localhost:8765 with fake chrome.* APIs
+npm run check-links
+```
 
 ## Keyboard Shortcuts (library)
 
